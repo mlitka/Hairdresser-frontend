@@ -42,7 +42,9 @@ module.exports = {
         test: /\.scss$/,
         exclude: helpers.root('src', 'app'),
         loader: ExtractTextPlugin.extract('css!sass')
-      }
+      },
+     { test: require.resolve('jquery'), loader: 'expose?jQuery!expose?$' }
+      
     ]
   },
 
@@ -54,11 +56,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     }),
-    
-    new webpack.ProvidePlugin({   
-        jQuery: 'jquery',
-        $: 'jquery',
-        jquery: 'jquery'
+
+    new webpack.ProvidePlugin({
+      jQuery: 'jquery',
+      $: 'jquery'
     })
   ]
 
