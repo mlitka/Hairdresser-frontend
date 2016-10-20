@@ -45,7 +45,7 @@ module.exports = {
         exclude: helpers.root('src', 'app'),
         loader: ExtractTextPlugin.extract('css!sass')
       }
-    //  { test: require.resolve('jquery'), loader: 'expose?jQuery!expose?$' }
+    
       
     ]
   },
