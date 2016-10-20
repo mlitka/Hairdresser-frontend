@@ -10,6 +10,8 @@ module.exports = {
     'app': './src/main.ts'
   },
 
+  devtool: 'source-map',
+
   resolve: {
     extensions: ['', '.js', '.ts']
   },
@@ -42,24 +44,26 @@ module.exports = {
         test: /\.scss$/,
         exclude: helpers.root('src', 'app'),
         loader: ExtractTextPlugin.extract('css!sass')
-      },
-     { test: require.resolve('jquery'), loader: 'expose?jQuery!expose?$' }
+      }
+    //  { test: require.resolve('jquery'), loader: 'expose?jQuery!expose?$' }
       
     ]
   },
 
   plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html'
+    }),
+ 
     new webpack.optimize.CommonsChunkPlugin({
       name: ['app', 'vendor', 'polyfills']
     }),
 
-    new HtmlWebpackPlugin({
-      template: 'src/index.html'
-    }),
-
     new webpack.ProvidePlugin({
+      $: 'jquery',
       jQuery: 'jquery',
-      $: 'jquery'
+      jquery: 'jquery',
+      'window.jQuery': 'jquery'
     })
   ]
 
