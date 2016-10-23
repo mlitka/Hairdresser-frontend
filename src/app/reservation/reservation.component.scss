@@ -1,4 +1,5 @@
 $bg-color: #4e4e4e;
+$primary-bg-color: rgb(229,0,0);
 .container{
     background-color: $bg-color;
     width: 100%;
@@ -7,4 +8,13 @@ $bg-color: #4e4e4e;
 }
 .row{
     margin-top: 60px;
+}
+.btn{
+  border-radius: 0;
+}
+.btn-primary{
+  background-color: $primary-bg-color;
+}
+#reserve{
+    margin-left: 80%;
 }

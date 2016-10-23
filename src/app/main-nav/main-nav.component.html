@@ -5,7 +5,7 @@
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-			<a class="navbar-brand page-scroll" [routerLink]="['/']" (click)="goTo('page-top')">Hair salon</a>
+			<a pageScroll class="navbar-brand page-scroll" [routerLink]="['/']" href="#page-top">Hair salon</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -15,16 +15,16 @@
 					<a [routerLink]="['/reservation']" >Reserve visit</a>
 				</li>
 				<li>
-					<a [routerLink]="['/']" [fragment]="'about'" (click)="goTo('about')">About</a>
+					<a pageScroll [routerLink]="['/']" href="#about">About</a>
 				</li>
 				<li>
-					<a [routerLink]="['/']" [fragment]="'services'" (click)="goTo('services')">Services</a>
+					<a pageScroll [routerLink]="['/']" href="#services">Services</a>
 				</li>
 				<li>
-					<a [routerLink]="['/']" [fragment]="'portfolio'" (click)="goTo('portfolio')">Portfolio</a>
+					<a pageScroll [routerLink]="['/']" href="#portfolio">Portfolio</a>
 				</li>
 				<li>
-					<a [routerLink]="['/']" [fragment]="'contact'" (click)="goTo('contact')">Contact</a>
+					<a pageScroll [routerLink]="['/']" href="#contact">Contact</a>
 				</li>
 			</ul>
 		</div>

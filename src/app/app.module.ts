@@ -11,7 +11,8 @@ import { ReservationComponent } from './reservation/reservation.component';
 import { ServicepickerComponent } from './servicepicker/servicepicker.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
-import {FacebookService} from 'ng2-facebook-sdk/dist';
+import { FacebookService } from 'ng2-facebook-sdk/dist';
+import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import {FacebookService} from 'ng2-facebook-sdk/dist';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBL93wp9blDVog7mSuJ3xNaZy65zMXmlZ0'
     }),
+    Ng2PageScrollModule
   ],
   declarations: [
     AppComponent,
