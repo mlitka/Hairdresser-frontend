@@ -42,11 +42,10 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        exclude: helpers.root('src', 'app'),
-        loader: ExtractTextPlugin.extract('css!sass')
+        loaders: ['raw-loader', 'sass-loader'] 
       }
-    
-      
+
+
     ]
   },
 
@@ -54,7 +53,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     }),
- 
+
     new webpack.optimize.CommonsChunkPlugin({
       name: ['app', 'vendor', 'polyfills']
     }),

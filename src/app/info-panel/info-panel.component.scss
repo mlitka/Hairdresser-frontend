@@ -1,0 +1,28 @@
+.sebm-google-map-container {
+  height: 300px;
+  width: 100%;
+  position: relative;
+  left: 15px;
+}
+
+#wrapper{
+  position: relative;
+}
+
+#contact-info{
+  background-color: rgba(34, 34, 34, 0.4);
+  left: 15px;
+  top: 0;
+  margin: 10px;
+  position: absolute;
+  width: 30%;
+  padding: 10px;
+  height: inherit;
+}
+
+#contact-info>span{
+  color: rgb(229,0,0);
+  font-size: 30;
+  font-weight: 600;
+  text-transform: uppercase;
+}

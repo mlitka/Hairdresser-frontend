@@ -4,7 +4,7 @@ import * as moment from 'moment';
 @Component({
   selector: 'my-datepicker',
   templateUrl: './datepicker.component.html',
-  styleUrls: []
+  styleUrls: ['./datepicker.component.scss']
 })
 export class DatepickerComponent {
      public dt:Date = new Date();
@@ -23,11 +23,12 @@ export class DatepickerComponent {
   public constructor() {
     (this.tomorrow = new Date()).setDate(this.tomorrow.getDate() + 1);
     (this.afterTomorrow = new Date()).setDate(this.tomorrow.getDate() + 2);
-    (this.minDate = new Date()).setDate(this.minDate.getDate() - 1000);
+    (this.minDate = new Date());
     this.events = [
       {date: this.tomorrow, status: 'full'},
       {date: this.afterTomorrow, status: 'partially'}
     ];
+    this.toggleMin();
   }
  
   public getDate():number {

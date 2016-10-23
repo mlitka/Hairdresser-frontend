@@ -11,6 +11,7 @@ import 'jquery';
 import 'bootstrap';
 import 'ng2-bootstrap'
 import 'angular2-google-maps/core';
+import 'ng2-facebook-sdk';
 // Other vendors for example jQuery, Lodash or Bootstrap
 // You can import js, ts, css, sass, ...
 // require('jquery/dist/jquery.js');

@@ -1,0 +1,8 @@
+$bg-nav-color: #222;
+$active-color: rgb(229, 0, 0);
+#mainNav{
+    background-color: $bg-nav-color;
+}
+.active{
+    background-color: $active-color;
+}

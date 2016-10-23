@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
     selector: 'info-panel',
     templateUrl: './info-panel.component.html',
-    styleUrls: ['./info-panel.component.css']
+    styleUrls: ['./info-panel.component.scss']
 })
 export class InfoPanelComponent{
   title: string = 'My first angular2-google-maps project';
