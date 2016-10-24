@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class ReservationComponent {
     public chosenService = false;
+    public modalContent = 'Confirm reservation';
     onChosenService(service:any){
         console.log("event");
         console.log("chosen service got in parent: "+ service);

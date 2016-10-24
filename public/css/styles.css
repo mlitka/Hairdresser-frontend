@@ -150,7 +150,7 @@ header {
   background-size: cover;
   -o-background-size: cover;
   background-position: center;
-  background-image: url('../images/header.jpg');
+  background-image: url('../images/hair.jpg');
   text-align: center;
   color: white;
 }
@@ -160,6 +160,10 @@ header .header-content {
   padding: 100px 15px 100px;
   width: 100%;
 }
+ .header-content-inner{
+  background-color: rgba(34, 34, 34, 0.3);
+  padding: 40px;
+ }
 header .header-content .header-content-inner h1 {
   font-weight: 700;
   text-transform: uppercase;
@@ -172,7 +176,6 @@ header .header-content .header-content-inner hr {
 }
 header .header-content .header-content-inner p {
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.7);
   font-size: 16px;
   margin-bottom: 50px;
 }

@@ -11,6 +11,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<button id="reserve" class="btn btn-primary btn-xl">RESERVE VISIT</button>
+		<button id="reserve" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#confirm-modal">RESERVE VISIT</button>
+		<confirm-modal [modalContent]="modalContent"></confirm-modal>
 	</div>
 </div>
