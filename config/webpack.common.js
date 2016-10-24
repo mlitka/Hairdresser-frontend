@@ -13,7 +13,8 @@ module.exports = {
   devtool: 'source-map',
 
   resolve: {
-    extensions: ['', '.js', '.ts']
+     descriptionFiles: ['package.json'],
+    extensions: ['', '.js', '.ts', '.html']
   },
 
   module: {
@@ -43,9 +44,8 @@ module.exports = {
       {
         test: /\.scss$/,
         loaders: ['raw-loader', 'sass-loader'] 
-      }
-
-
+      },
+      { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports?jQuery=jquery' }
     ]
   },
 

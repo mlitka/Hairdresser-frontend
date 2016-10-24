@@ -1,0 +1,27 @@
+<!--<ImageModal [modalImages]="images"></ImageModal>-->
+<div class="container-fluid">
+	<div class="row no-gutter">
+		<div *ngFor="let img of images; let i= index" class="col-lg-4 col-sm-6" >
+			<!--<div class="float-left" *ngIf="i <= 2">
+		<a class="more" *ngIf="i==2" (click)="OpenImageModel(img.img,images)"> +{{images.length - 3}} more </a>
+		<img class="list-img" src="{{img.thumb}}" (click)="OpenImageModel(img.img,images)" alt='Image' />
+	</div>-->
+				<a class="portfolio-box"  (click)="OpenImageModel(img.img,images)" *ngIf="i <= 5">
+				<img class="img-responsive" src="{{img.thumb}}" alt='Image' />
+				<div class="portfolio-box-caption">
+			<div class="portfolio-box-caption-content">
+				<div class="project-category text-faded">
+					Category
+				</div>
+				<div class="project-name">
+					Project Name
+				</div>
+			</div>
+		</div>
+				</a>
+		</div>
+	</div>
+</div>
+<div *ngIf="openModalWindow">
+	<ImageModal [modalImages]="images" [imagePointer]="imagePointer" (cancelEvent)="cancelImageModel()"></ImageModal>
+</div>

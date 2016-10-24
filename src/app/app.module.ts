@@ -13,6 +13,9 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { FacebookService } from 'ng2-facebook-sdk/dist';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { ImageModal } from './image-popup/angular2-image-popup';
+import { ImagePopupComponent } from './image-popup/image-popup.component';
 
 @NgModule({
   imports: [
@@ -22,7 +25,7 @@ import { Ng2PageScrollModule } from 'ng2-page-scroll';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBL93wp9blDVog7mSuJ3xNaZy65zMXmlZ0'
     }),
-    Ng2PageScrollModule
+    Ng2PageScrollModule,
   ],
   declarations: [
     AppComponent,
@@ -32,7 +35,10 @@ import { Ng2PageScrollModule } from 'ng2-page-scroll';
     ReservationComponent,
     ServicepickerComponent,
     MainPageComponent,
-    MainNavComponent
+    MainNavComponent,
+    ConfirmModalComponent,
+    ImageModal,
+    ImagePopupComponent
   ],
   providers: [
     FacebookService
