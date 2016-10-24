@@ -10,8 +10,11 @@ module.exports = {
     'app': './src/main.ts'
   },
 
+  devtool: 'source-map',
+
   resolve: {
-    extensions: ['', '.js', '.ts']
+     descriptionFiles: ['package.json'],
+    extensions: ['', '.js', '.ts', '.html']
   },
 
   module: {
@@ -37,17 +40,30 @@ module.exports = {
         test: /\.css$/,
         include: helpers.root('src', 'app'),
         loader: 'raw'
-      }
+      },
+      {
+        test: /\.scss$/,
+        loaders: ['raw-loader', 'sass-loader'] 
+      },
+      { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports?jQuery=jquery' }
     ]
   },
 
   plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html'
+    }),
+
     new webpack.optimize.CommonsChunkPlugin({
       name: ['app', 'vendor', 'polyfills']
     }),
 
-    new HtmlWebpackPlugin({
-      template: 'src/index.html'
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      jquery: 'jquery',
+      'window.jQuery': 'jquery'
     })
   ]
+
 };

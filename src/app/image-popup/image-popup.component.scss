@@ -1,0 +1,5 @@
+@import '../../../public/css/styles.css';
+$primary-bg-color: rgba(229,0,0,0.9);
+.portfolio-box .portfolio-box-caption {
+    background: $primary-bg-color!important;
+}

@@ -9,3 +9,10 @@ import '@angular/router';
 import 'rxjs';
 // Other vendors for example jQuery, Lodash or Bootstrap
 // You can import js, ts, css, sass, ...
+import 'jquery';
+import 'bootstrap';
+import 'ng2-bootstrap'
+import 'angular2-google-maps/core';
+import 'ng2-facebook-sdk';
+import 'ng2-page-scroll';
+import 'bootstrap/dist/css/bootstrap.css';

@@ -1,0 +1,20 @@
+$primary-bg-color: rgb(229,0,0);
+.w100{
+  padding: 0;
+  width: 100%;
+}
+.bg-primary{
+  background-color: $primary-bg-color;
+}
+.btn{
+  border-radius: 0;
+}
+hr{
+  border-color: $primary-bg-color;
+}
+.btn-primary{
+  background-color: $primary-bg-color;
+}
+.text-primary{
+  color: $primary-bg-color;
+}

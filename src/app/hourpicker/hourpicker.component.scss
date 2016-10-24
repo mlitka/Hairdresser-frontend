@@ -1,0 +1,17 @@
+.hour{
+    background-color: #222;
+    color: white;
+    width: 200px;
+    display: block;
+    padding: 10px;
+}
+.hour :hover{
+    background-color: #4e4e4e;
+}
+.hour:active{
+   background-color: #4e4e4e;
+   color:rgb(229, 0, 0); 
+}
+.hours{
+    margin-top: 10px;
+}
