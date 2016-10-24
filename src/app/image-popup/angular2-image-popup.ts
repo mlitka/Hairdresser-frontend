@@ -19,7 +19,7 @@ import {Component, Input,Output,ElementRef,EventEmitter,OnInit} from '@angular/c
    </div>
    </div>
        ` ,
-        styleUrls: ['./css/style.css','./css/main.css']
+        styleUrls: ['./angular2-image-popup.css']
 })
 export class ImageModal implements OnInit {
    public _element:any;
