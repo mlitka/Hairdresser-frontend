@@ -14,8 +14,9 @@ import { MainNavComponent } from './main-nav/main-nav.component';
 import { FacebookService } from 'ng2-facebook-sdk/dist';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
-import { ImageModal } from './image-popup/angular2-image-popup';
+import { ImageModal } from './image-popup/angular2-image-popup/angular2-image-popup';
 import { ImagePopupComponent } from './image-popup/image-popup.component';
+import { HairdresserpickerComponent } from './reservation/hairdresserpicker/hairdresserpicker.component';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { ImagePopupComponent } from './image-popup/image-popup.component';
     MainNavComponent,
     ConfirmModalComponent,
     ImageModal,
-    ImagePopupComponent
+    ImagePopupComponent,
+    HairdresserpickerComponent
   ],
   providers: [
     FacebookService

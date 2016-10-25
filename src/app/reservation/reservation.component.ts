@@ -6,8 +6,14 @@ import { Component } from '@angular/core';
     styleUrls: ['reservation.component.scss']
 })
 export class ReservationComponent {
+    public chosenHairdresser = false;
     public chosenService = false;
     public modalContent = 'Confirm reservation';
+    onChosenHairdresser(haidresser:any){
+        console.log("event");
+        console.log("chosen hairdresser got in parent: "+ haidresser);
+        this.chosenHairdresser = true;
+    }
     onChosenService(service:any){
         console.log("event");
         console.log("chosen service got in parent: "+ service);

@@ -1,0 +1,8 @@
+<div class="hairdresser">
+	<div *ngFor="let hairdresser of hairdressers">
+		<a class="hairdresser" (click)="chosenHairdresser(hairdresser)">
+            <img src="{{hairdresser.img}}" />
+            {{hairdresser.name}}
+            </a><br/>
+	</div>
+</div>
