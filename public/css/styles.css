@@ -384,7 +384,7 @@ fieldset[disabled] .btn-primary.active {
 .btn {
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
   border: none;
-  border-radius: 300px;
+  /*border-radius: 300px;*/
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -415,4 +415,36 @@ img::-moz-selection {
   top: 50%;
   margin-left: -50px; 
   margin-top: -50px;
+}
+.btn{
+  border-color: #222;
+  border-width: thin;
+  border-style: solid;
+}
+.btn-info{
+  border-color: #222;
+}
+.btn-info:active, .btn-info.active, .open > .dropdown-toggle.btn-info{
+    background-color: #e50000;
+    /*border-radius: 4px!important;*/
+    color: white;
+}
+.btn-info.active:hover{
+  background-color: #ea3232;
+}
+.text-info{
+    color: black;
+}
+.btn:hover{
+  background-color: #ea3232;
+}
+.well-sm{
+    border-color: #222;
+    border-style: solid;
+    background-color: rgba(180,0,0,0.8);
+}
+.btn.disabled{
+  border-color: rgba(34,34,34,0.6);
+  border-width: thin;
+  border-style: solid;
 }

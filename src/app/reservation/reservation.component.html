@@ -1,20 +1,29 @@
-<div class="container">
-	<div class="row">
-		<div class="col-md-3">
-			<my-datepicker></my-datepicker>
+<!--<header>-->
+<!--<div class="reservation">-->
+<!--<div class="header-content-inner">-->
+<div class="reservation-page">
+	<div class="reservation ">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<my-datepicker (onChosenDate)="onChosenDate($event)"></my-datepicker>
+				</div>
+				<div class="col-md-3">
+					<my-hairdresserpicker (onChosenHairdresser)="onChosenHairdresser($event)" [hairdressers]="hairdressers"></my-hairdresserpicker>
+				</div>
+				<div class="col-md-3" *ngIf="chosenHairdresser">
+					<my-servicepicker (onChosenService)="onChosenService($event)" [services]="services"></my-servicepicker>
+				</div>
+				<div class="col-md-2" *ngIf="chosenService">
+					<my-hourpicker [visits]="visits"></my-hourpicker>
+				</div>
+			</div>
 		</div>
-		<div class="col-md-3">
-			<my-hairdresserpicker (onChosenHairdresser)="onChosenHairdresser($event)"></my-hairdresserpicker>
+		<br>
+		<div>
+			<button id="reserve" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#confirm-modal">RESERVE VISIT</button>
+			<confirm-modal [modalContent]="modalContent"></confirm-modal>
 		</div>
-		<div class="col-md-3" *ngIf="chosenHairdresser">
-			<my-servicepicker (onChosenService)="onChosenService($event)"></my-servicepicker>
-		</div>
-		<div class="col-md-3" *ngIf="chosenService">
-			<my-hourpicker></my-hourpicker>
-		</div>
-	</div>
-	<div class="row">
-		<button id="reserve" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#confirm-modal">RESERVE VISIT</button>
-		<confirm-modal [modalContent]="modalContent"></confirm-modal>
 	</div>
 </div>
+<!--</header>-->

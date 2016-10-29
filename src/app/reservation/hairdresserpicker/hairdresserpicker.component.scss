@@ -1,21 +1,23 @@
+$selected-bg-color: rgba(180, 0, 0,0.8);
+$div-bg-color: rgba(34,34, 34,0.6);
 .hairdresser{
-    // background-color: #222;
     color: white;
-    width: 200px;
-    // display: block;
-    padding: 10px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 .hairdresser :hover{
-    background-color: #4e4e4e;
+    background-color: $selected-bg-color;
 }
-.hairdresser:active{
-   background-color: #4e4e4e;
-   color:rgb(229, 0, 0); 
+#hairdresserImg{
+    height: 50px;
+    width: initial;
 }
-.hairdressers{
-    margin-top: 10px;
+.hairdresser>div{
+    padding: 10px;
+    margin: 3px;
+    background-color: $div-bg-color;
 }
-.hairdresser>img{
-    width: 40%;
-    padding: 5px;
+.selected{
+    background-color: $selected-bg-color!important;
 }

@@ -1,3 +1,5 @@
-<div class="hours">
-	<div *ngFor="let hour of hours"><a class="hour">{{hour.time}}</a><br/></div>
+<div class="hour">
+	<div *ngFor="let visit of visits" (click)="chosenHour(visit)" [class.selected]="isHourChosen(visit)">
+		{{visit.time}} - {{visit.endTime}}
+	</div>
 </div>

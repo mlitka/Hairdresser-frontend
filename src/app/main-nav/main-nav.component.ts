@@ -6,7 +6,5 @@ import { Component } from '@angular/core';
     styleUrls: ['main-nav.component.scss']
 })
 export class MainNavComponent {
-  goTo(location: string): void {
-    window.location.hash = location;
-}
+  
 }

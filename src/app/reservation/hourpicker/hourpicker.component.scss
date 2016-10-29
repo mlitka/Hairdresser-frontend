@@ -1,17 +1,18 @@
+$selected-bg-color: rgba(180, 0, 0,0.8);
 .hour{
-    background-color: #222;
     color: white;
-    width: 200px;
-    display: block;
-    padding: 10px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 .hour :hover{
-    background-color: #4e4e4e;
+    background-color: $selected-bg-color;
 }
-.hour:active{
-   background-color: #4e4e4e;
-   color:rgb(229, 0, 0); 
+.hour>div{
+    padding: 10px;
+    background-color: rgba(34,34, 34,0.6);
+    margin: 3px;
 }
-.hours{
-    margin-top: 10px;
+.selected{
+    background-color: $selected-bg-color!important;
 }

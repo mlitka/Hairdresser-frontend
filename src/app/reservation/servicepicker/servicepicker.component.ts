@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
+import { HairService } from '../../common/model/hair-service';
 
 @Component({
     selector: 'my-servicepicker',
@@ -7,13 +8,19 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class ServicepickerComponent {
     @Output() onChosenService = new EventEmitter<string>();
-    public services = [
-        { name: "service1" },
-        { name: "service2" },
-        { name: "service3" }
-    ]
-    chosenService(service:any){
+    @Input("services") services: HairService[];
+    private selectedService: HairService;
+
+    chosenService(service: HairService) {
         console.log(service);
+        this.selectedService = service;
         this.onChosenService.emit(service.name);
+    }
+
+    isServiceChosen(service: HairService): boolean {
+        if (service != undefined && this.selectedService != undefined) {
+            return service.id === this.selectedService.id;
+        }
+        return false;
     }
 }

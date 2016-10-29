@@ -1,18 +1,18 @@
+$selected-bg-color:rgba(180, 0, 0,0.8);
 .service{
-    background-color: rgb(229, 0, 0); 
     color: white;
-    width: 200px;
-    display: block;
-    padding: 10px;
-    
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 .service :hover{
-    background-color: #4e4e4e;
+    background-color: $selected-bg-color;
 }
-.service :active{
-   background-color: #4e4e4e;
-   color:#222; 
+.service>div{
+    padding: 15px;
+    background-color: rgba(34,34, 34,0.6);
+    margin: 3px;
 }
-.services{
-    margin-top: 10px;
+.selected{
+    background-color: $selected-bg-color!important;
 }

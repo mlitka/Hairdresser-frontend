@@ -1,4 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Hairdresser } from '../../common/model/hairdresser';
 
 @Component({
     selector: 'my-hairdresserpicker',
@@ -7,13 +8,19 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class HairdresserpickerComponent {
     @Output() onChosenHairdresser = new EventEmitter<string>();
-    public hairdressers = [
-        { name: "name1" , img: "../../../public/images/avatars/girl.png"},
-        { name: "name2" , img: "../../../public/images/avatars/male.png"},
-        { name: "name3" , img: "../../../public/images/avatars/girl2.png"}
-    ];
-     chosenHairdresser(hairdresser:any){
+    @Input("hairdressers") hairdressers: Hairdresser[];
+    public selectedHairdresser: Hairdresser;
+
+    chosenHairdresser(hairdresser: Hairdresser) {
         console.log(hairdresser);
-        this.onChosenHairdresser.emit(hairdresser.name);
+        this.selectedHairdresser = hairdresser;
+        this.onChosenHairdresser.emit(hairdresser.lastName);
+    }
+
+    isHairdresserChosen(hairdresser: Hairdresser): boolean {
+        if (hairdresser != undefined && this.selectedHairdresser != undefined) {
+            return hairdresser.id === this.selectedHairdresser.id;
+        }
+        return false;
     }
 }

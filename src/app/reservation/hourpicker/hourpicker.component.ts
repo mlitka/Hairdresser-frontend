@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { VisitProposal } from '../../common/model/visit-proposal';
 
 @Component({
     selector: 'my-hourpicker',
@@ -6,10 +7,25 @@ import { Component } from '@angular/core';
     styleUrls: ['hourpicker.component.scss']
 })
 export class HourpickerComponent {
-    public hours = [
-        { time: "15:00" },
-        { time: "16:00" },
-        { time: "17:00" },
-        { time: "18:00" }
-    ]
+    @Input("visits") visits: VisitProposal[] = [];
+    @Output() onChosenHour = new EventEmitter<string>();
+    private selectedHour: VisitProposal;
+    // public hours = [
+    //     { time: "15:00" },
+    //     { time: "16:00" },
+    //     { time: "17:00" },
+    //     { time: "18:00" }
+    // ]
+    chosenHour(hour: VisitProposal) {
+        console.log(hour);
+        this.selectedHour = hour;
+        this.onChosenHour.emit(hour.time);
+    }
+
+    public isHourChosen(hour: VisitProposal): boolean {
+        if (hour != undefined && this.selectedHour != undefined) {
+            return hour.time === this.selectedHour.time;
+        }
+        return false;
+    }
 }
