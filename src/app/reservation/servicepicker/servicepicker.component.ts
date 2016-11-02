@@ -7,14 +7,14 @@ import { HairService } from '../../common/model/hair-service';
     styleUrls: ['servicepicker.component.scss']
 })
 export class ServicepickerComponent {
-    @Output() onChosenService = new EventEmitter<string>();
+    @Output() onChosenService = new EventEmitter<HairService>();
     @Input("services") services: HairService[];
     private selectedService: HairService;
 
     chosenService(service: HairService) {
         console.log(service);
         this.selectedService = service;
-        this.onChosenService.emit(service.name);
+        this.onChosenService.emit(service);
     }
 
     isServiceChosen(service: HairService): boolean {

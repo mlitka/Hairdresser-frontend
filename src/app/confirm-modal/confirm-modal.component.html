@@ -10,9 +10,34 @@
 			</div>
 			<div class="modal-body">
 				<p>{{modalContent}}</p>
+				<br>
+				<div class="container">
+					<form #userForm="ngForm">
+						<div class="form-group" *ngIf="!loggedUser">
+							<label for="lastName">Last Name</label>
+							<input type="text" class="form-control" id="lastName" required [(ngModel)]="model.lastName" name="lastName" #lastName="ngModel">
+							<!--<div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger">
+								Last Name is required
+							</div>-->
+						</div>
+						<div class="form-group" *ngIf="!loggedUser">
+							<label for="firstName">First Name</label>
+							<input type="text" class="form-control" id="firstName" required [(ngModel)]="model.firstName" name="firstName">
+						</div>
+						<div class="form-group" *ngIf="!loggedUser">
+							<label for="email">Email</label>
+							<input type="email" class="form-control" id="email" required [(ngModel)]="model.email" name="email">
+						</div>
+						<div class="form-group">
+							<label for="phoneNo">Phone No. (Format: 999-999-999)</label>
+							<input type='tel' pattern='\d{3}[\-]\d{3}[\-]\d{3}' class="form-control" id="phoneNo" required [(ngModel)]="model.phoneNo" name="phoneNo">
+						</div>
+						<!--<button type="submit" class="btn btn-default">Submit</button>-->
+					</form>
+				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Confirm</button>
+				<button type="submit" class="btn btn-default" data-dismiss="modal" [disabled]="!userForm.form.valid" (click)="onConfirmClick()">Confirm</button>
 			</div>
 		</div>
 	</div>

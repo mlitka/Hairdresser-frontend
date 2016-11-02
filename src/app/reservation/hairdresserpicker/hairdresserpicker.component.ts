@@ -7,14 +7,14 @@ import { Hairdresser } from '../../common/model/hairdresser';
     styleUrls: ['hairdresserpicker.component.scss']
 })
 export class HairdresserpickerComponent {
-    @Output() onChosenHairdresser = new EventEmitter<string>();
+    @Output() onChosenHairdresser = new EventEmitter<Hairdresser>();
     @Input("hairdressers") hairdressers: Hairdresser[];
     public selectedHairdresser: Hairdresser;
 
     chosenHairdresser(hairdresser: Hairdresser) {
         console.log(hairdresser);
         this.selectedHairdresser = hairdresser;
-        this.onChosenHairdresser.emit(hairdresser.lastName);
+        this.onChosenHairdresser.emit(hairdresser);
     }
 
     isHairdresserChosen(hairdresser: Hairdresser): boolean {
