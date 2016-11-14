@@ -16,3 +16,9 @@ import 'angular2-google-maps/core';
 import 'ng2-facebook-sdk';
 import 'ng2-page-scroll';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'primeng/resources/themes/omega/theme.css'
+import 'primeng/resources/primeng.min.css';
+import 'primeng/primeng';
+import 'fullcalendar';
+import 'fullcalendar/dist/fullcalendar.min.css';
+import 'ng2-facebook-sdk/dist/ng2-facebook-sdk';

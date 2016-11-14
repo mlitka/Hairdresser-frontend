@@ -5,7 +5,7 @@
 	<div class="reservation ">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<my-datepicker (onChosenDate)="onChosenDate($event)"></my-datepicker>
 				</div>
 				<div class="col-md-3">
@@ -14,16 +14,17 @@
 				<div class="col-md-3" *ngIf="chosenHairdresser">
 					<my-servicepicker (onChosenService)="onChosenService($event)" [services]="services"></my-servicepicker>
 				</div>
-				<div class="col-md-2" *ngIf="chosenService">
+				<div class="col-md-3" *ngIf="chosenService">
 					<my-hourpicker [visits]="visits" (onChosenHour)="onChosenHour($event)"></my-hourpicker>
 				</div>
 			</div>
 		</div>
 		<br>
-		<div>
-			<button id="reserve" class="btn btn-primary btn-xl" data-toggle="modal" data-target="#confirm-modal" (click)="onReserveClick()">RESERVE VISIT</button>
+		<div class="container">
+			<button id="reserve" class="btn btn-primary" data-toggle="modal" data-target="#confirm-modal" (click)="onReserveClick()">RESERVE VISIT</button>
 			<confirm-modal [modalContent]="modalContent" [loggedUser]="loggedUser" (onConfirm)="onModalConfirm($event)"></confirm-modal>
 		</div>
 	</div>
 </div>
 <!--</header>-->
+<main-footer></main-footer>

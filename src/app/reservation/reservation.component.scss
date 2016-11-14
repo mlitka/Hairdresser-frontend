@@ -1,11 +1,12 @@
+// @import '../schedule/schedule.component.scss';
 $bg-color: #4e4e4e;
 $primary-bg-color: rgb(229,0,0);
 $selected-bg-color: rgba(180, 0, 0,0.8);
 .reservation{
     // padding: 15px;
-    background-color: rgba(34, 34, 34, 0.3);    
+    background-color: rgba(185, 185, 185, 0.1);    
     top: 100px;
-    position: inherit;
+    position: relative;
     // margin: 1%;
     margin-left: auto;
     margin-right: auto;
@@ -28,21 +29,30 @@ $selected-bg-color: rgba(180, 0, 0,0.8);
 }
 #reserve{
     margin-left: 80%;
+    margin-right: auto;
     background-color: rgb(180,0,0);
 }
 .reservation-page{
     position: relative;
     width: 100%;
     height: 100%;
-    background-image: url('../../../../public/images/hair.jpg');
+    background-image: url('../../../../public/images/grey-vintage.gif');
     background-color: $bg-color;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size:100%;
+    background-attachment: fixed;
+
+    // background-position: center;
+    // background-repeat: repeat;
+    // background-size:100%;
     
 }
 .reservation>.container{
     margin-left: auto;
     margin-right: auto;
     padding: 0;
+}
+@media (max-width: 660px) {
+    #reserve{
+        margin-left: auto;
+        margin-right: auto;
+    }
 }

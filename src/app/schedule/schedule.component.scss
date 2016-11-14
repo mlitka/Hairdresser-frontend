@@ -1,0 +1,31 @@
+$bg-color: #4e4e4e;
+p-schedule{
+    background-color: rgba(256,256,256,0.1)
+}
+.schedule-page{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-image: url('../../../../public/images/grey-vintage.gif');
+    background-color: $bg-color;
+    // background-repeat: repeat;
+    background-attachment: fixed;
+    // background-size: 200px 200px;
+    // top:0;
+    // bottom:0;
+    // right:0;
+    // left:0;
+}
+.schedule{
+    top: 70px;
+    position: relative;
+    width: 70%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 60px;
+}
+.margin-bottom{
+    height: 100px;
+    position: relative;
+}

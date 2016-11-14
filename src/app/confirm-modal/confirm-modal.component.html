@@ -26,7 +26,7 @@
 						</div>
 						<div class="form-group" *ngIf="!loggedUser">
 							<label for="email">Email</label>
-							<input type="email" class="form-control" id="email" required [(ngModel)]="model.email" name="email">
+							<input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" id="email" required [(ngModel)]="model.email" name="email">
 						</div>
 						<div class="form-group">
 							<label for="phoneNo">Phone No. (Format: 999-999-999)</label>

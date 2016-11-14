@@ -1,4 +1,6 @@
-const BASIC_URL: string = "http://192.168.1.41:8080";
+// const BASIC_URL: string = "http://192.168.1.41:8080";
+const BASIC_URL: string = "http://localhost:80";
+const LOGIN: string = "/login";
 const HAIRDRESSERS: string = "/hairdressers";
 const SERVICES: string = "/services";
 const VISIT_PROPOSALS: string = "/visits/";
@@ -14,6 +16,7 @@ export const VISIT_PROPOSALS_URL = function (hairdresserId: number, serviceId: n
     return BASIC_URL + VISIT_PROPOSALS + hairdresserId + VISIT_AVAILABLE + serviceId + VISIT_DATE + date;
 }
 export const VISIT_RESERVE_URL = BASIC_URL + VISIT + VISIT_RESERVE;
+export const LOGIN_URL = BASIC_URL + LOGIN;
 
 
 // "/visits/4/available/3?date=2016-12-12";

@@ -5,26 +5,34 @@
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-			<a pageScroll class="navbar-brand page-scroll" [routerLink]="['/']" href="#page-top">Hair salon</a>
+			<a pageScroll class="navbar-brand page-scroll page-name" [routerLink]="['/']" href="#page-top" (click)="setActiveHref('page-top')">Hair salon</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
 				<li>
-					<a [routerLink]="['/reservation']" >Reserve visit</a>
+					<a [routerLink]="['/schedule']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" (click)="setActiveHref('schedule')">Schedule</a>
 				</li>
 				<li>
-					<a pageScroll [routerLink]="['/']" href="#about">About</a>
+					<a [routerLink]="['/reservation']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" (click)="setActiveHref('reservation')">Reserve visit</a>
 				</li>
 				<li>
-					<a pageScroll [routerLink]="['/']" href="#services">Services</a>
+					<a pageScroll [routerLink]="['/']" href="#about" [class.active]="isActiveHref('about')" (click)="setActiveHref('about')">About</a>
 				</li>
 				<li>
-					<a pageScroll [routerLink]="['/']" href="#portfolio">Portfolio</a>
+					<a pageScroll [routerLink]="['/']" href="#services" [class.active]="isActiveHref('services')" (click)="setActiveHref('services')">Services</a>
 				</li>
 				<li>
-					<a pageScroll [routerLink]="['/']" href="#contact">Contact</a>
+					<a pageScroll [routerLink]="['/']" href="#portfolio" [class.active]="isActiveHref('portfolio')" (click)="setActiveHref('portfolio')">Portfolio</a>
+				</li>
+				<li>
+					<a pageScroll [routerLink]="['/']" href="#contact" [class.active]="isActiveHref('contact')" (click)="setActiveHref('contact')">Contact</a>
+				</li>
+				<li>
+					<a class="nav-login-modal" data-toggle="modal" data-target="#login-modal">
+						<span class="glyphicon glyphicon-log-in"></span>&nbsp;Log in
+					</a>
 				</li>
 			</ul>
 		</div>
@@ -32,3 +40,4 @@
 	</div>
 	<!-- /.container-fluid -->
 </nav>
+<login-modal></login-modal>

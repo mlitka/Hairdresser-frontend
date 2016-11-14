@@ -4,5 +4,8 @@ $active-color: rgb(229, 0, 0);
     background-color: $bg-nav-color;
 }
 .active{
-    background-color: $active-color;
+    color: $active-color!important;
+}
+.nav-login-modal{
+    cursor:pointer
 }
