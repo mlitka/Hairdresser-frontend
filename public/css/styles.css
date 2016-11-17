@@ -467,7 +467,7 @@ router-outlet{
 }
 .ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
     border: 1px solid #222;
-    background: #7d0000;
+    background: rgba(34,34,34,0.4);
     color: #FFFFFF;
 }
 .fc-event, .fc-event-dot {
@@ -477,3 +477,9 @@ router-outlet{
 /*.active{
     color: #7d0000!important;
 }*/
+.glyphicon-star, .glyphicon-star-empty{
+    color: rgb(255,112,112);
+}
+.glyphicon-arrow-right{
+  color: white;
+}

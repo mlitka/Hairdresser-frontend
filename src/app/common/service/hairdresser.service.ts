@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response, RequestOptions, CookieXSRFStrategy, XSRFStrategy } from '@angular/http';
-
+import { Headers, Http, Response, RequestOptions, ResponseOptions } from '@angular/http';
+import { CookieService } from 'angular2-cookie/core';
 import { Observable } from 'rxjs/Observable';
 
 import { Hairdresser } from '../model/hairdresser';
@@ -12,24 +12,34 @@ import * as URL_CONST from './url';
 @Injectable()
 export class HairdresserService {
 
-    constructor(private http: Http) { }
+    constructor(private http: Http, private cookieService: CookieService) { }
 
-    b(a:any):string {
-        return a ? (a ^ Math.random() * 16 >> a / 4).toString(16) : (2e16.toString()).replace(/[01]/g, this.b)
-    };
+    getToken(): Observable<any> {
+        let options = new RequestOptions({ withCredentials: true });
+        return this.http.get(URL_CONST.HOME_URL, options).map(this.extractOptions).catch(this.handleError);
+    }
 
     login(loginData: any): Observable<any> {
         // let token = 'bdf46009f789e0873426fb38c4a984ca8f';
         // document.cookie = 'CSRF-TOKEN='+token;
         // 'X-CSRF-TOKEN':token, 'Cookie':
         // console.log(XSRFStrategy);
-        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded'});
+        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
         let options = new RequestOptions({ headers: headers, withCredentials: true });
         console.info(options);
-        // console.log(CookieXSRFStrategy.)
-        return this.http.post(URL_CONST.LOGIN_URL, JSON.stringify(loginData), options)
+        let body = "username=" + loginData.username + "&password=" + loginData.password;
+        console.log(body);
+        return this.http.post(URL_CONST.LOGIN_URL, body)
             .map(this.extractData)
             .catch(this.handleError);
+    }
+
+    logout(): Observable<any> {
+        return this.sendGet(URL_CONST.LOGOUT_URL);
+    }
+
+    register(userData: any): Observable<any> {
+        return this.sendPost(URL_CONST.REGISTER_URL, userData);
     }
 
     getHairdressers(): Observable<Hairdresser[]> {
@@ -66,8 +76,17 @@ export class HairdresserService {
         let body = res.json();
         return body || {};
     }
-    private handleError(error: any): Promise<any> {
+    private handleError(error: Response): Promise<any> {
         console.error('An error occurred', error);
-        return Promise.reject(error.message || error);
+        console.log(error.status)
+        return Promise.reject(error.text || error);
+    }
+
+    private extractOptions(res: Response) {
+        console.log("result")
+        console.log(res);
+        // this.cookieService.put("X-XSRF-TOKEN", res.headers.get("X-XSRF-TOKEN"));
+        // console.log(this.cookieService.get("X-XSRF-TOKEN"));
+        return res.json() || {};
     }
 }

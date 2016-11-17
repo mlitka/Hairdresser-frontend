@@ -6,25 +6,26 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<!--<h4 class="modal-title">Modal Header</h4>-->
+				<!--<h4 class="modal-">Modal Header</h4>-->
 			</div>
 			<div class="modal-body">
-				<p>{{modalContent}}</p>
+				<p *ngIf="reservationEnabled">{{modalContent}}</p>
+				<p *ngIf="!reservationEnabled">Missing reservation data!<br>Close modal and try to choose data again on reservation page</p>
 				<br>
-				<div class="container">
-					<form #userForm="ngForm">
-						<div class="form-group" *ngIf="!loggedUser">
+				<div class="container"  [hidden]="!reservationEnabled">
+					<form #userForm="ngForm" >
+						<div class="form-group" *ngIf="!authenticated || diffClient">
 							<label for="lastName">Last Name</label>
 							<input type="text" class="form-control" id="lastName" required [(ngModel)]="model.lastName" name="lastName" #lastName="ngModel">
 							<!--<div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger">
 								Last Name is required
 							</div>-->
 						</div>
-						<div class="form-group" *ngIf="!loggedUser">
+						<div class="form-group" *ngIf="!authenticated || diffClient">
 							<label for="firstName">First Name</label>
 							<input type="text" class="form-control" id="firstName" required [(ngModel)]="model.firstName" name="firstName">
 						</div>
-						<div class="form-group" *ngIf="!loggedUser">
+						<div class="form-group" *ngIf="!authenticated || diffClient">
 							<label for="email">Email</label>
 							<input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" id="email" required [(ngModel)]="model.email" name="email">
 						</div>
@@ -36,8 +37,9 @@
 					</form>
 				</div>
 			</div>
-			<div class="modal-footer">
-				<button type="submit" class="btn btn-default" data-dismiss="modal" [disabled]="!userForm.form.valid" (click)="onConfirmClick()">Confirm</button>
+			<div class="modal-footer" [hidden]="!reservationEnabled">
+				<a  (click)="onChangeForm()"><p>{{a_change_form_text}}</a>
+				<button  type="submit" class="btn btn-default" data-dismiss="modal" [disabled]="!userForm.form.valid" (click)="onConfirmClick()">Confirm</button>
 			</div>
 		</div>
 	</div>

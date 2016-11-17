@@ -1,13 +1,25 @@
-<div class="schedule-page">
+<div class="schedule-page" (window:resize)="onResize($event)">
 	<div class="schedule">
-		<p-schedule [events]="events" 
-		[header]="headerConfig" 
-		[aspectRatio]="aspectRatio" 
-		[businessHours]="businessHours" 
-		[weekNumbers]="true" 
-		[nowIndicator]="true" 
-		[defaultView]="defaultView"></p-schedule>
+		<p-schedule [events]="events" [header]="headerConfig" [contentHeight]="aspectRatio" [businessHours]="businessHours" [weekNumbers]="true"
+			[defaultView]="defaultView" [hiddenDays]="hiddenDays" (onEventClick)="eventModal.show()"></p-schedule>
 	</div>
-        <!--<div class="margin-bottom"></div>-->
+	<!--<div class="margin-bottom"></div>-->
+</div>
+<!--<event-modal></event-modal>-->
+<!-- Modal -->
+<div id="event-modal" bsModal #eventModal="bs-modal" class="modal fade" role="dialog" aria-hidden="true" >
+	<div class="modal-dialog modal-sm">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" (click)="eventModal.hide()">&times;</button>
+			</div>
+			<div class="modal-body">
+			</div>
+			<div class="modal-footer">
+			</div>
+		</div>
+	</div>
 </div>
 <main-footer></main-footer>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HairdresserService } from './../common/service/hairdresser.service';
 
 @Component({
@@ -6,23 +6,35 @@ import { HairdresserService } from './../common/service/hairdresser.service';
     templateUrl: './main-nav.component.html',
     styleUrls: ['main-nav.component.scss']
 })
-export class MainNavComponent {
-    activeHref: string;
+export class MainNavComponent implements OnInit {
 
-    constructor(private hairdresserService: HairdresserService) {
+    public authenticated = false;
+
+    constructor(private hairdresserService: HairdresserService) { }
+
+    ngOnInit() {
+        this.authenticated = window.sessionStorage.getItem("authenticated") == null ?
+            false : Boolean(window.sessionStorage.getItem("authenticated"));
     }
 
     setActiveHref(activeHref: string) {
-        this.activeHref = activeHref;
+        window.localStorage.setItem("activeLink", activeHref);
     }
 
     isActiveHref(href: string): boolean {
-        return this.activeHref === href;
+        return window.localStorage.getItem("activeLink") === href;
     }
 
-    login() {
-        console.log("inside login");
-        // this.hairdresserService.login();
-        // window.location.href = "http://localhost/facebook";
+    onLogoutClick() {
+        console.log("logging out");
+        this.hairdresserService
+            .logout()
+            .subscribe(
+            result => {
+                console.log("logged out");
+                window.sessionStorage.setItem("authenticated", "false");
+            },
+            error => console.error(error)
+            );
     }
 }

@@ -18,10 +18,10 @@
 					<a [routerLink]="['/reservation']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" (click)="setActiveHref('reservation')">Reserve visit</a>
 				</li>
 				<li>
-					<a pageScroll [routerLink]="['/']" href="#about" [class.active]="isActiveHref('about')" (click)="setActiveHref('about')">About</a>
+					<a pageScroll [routerLink]="['/']" href="#services" [class.active]="isActiveHref('services')" (click)="setActiveHref('services')">Services</a>
 				</li>
 				<li>
-					<a pageScroll [routerLink]="['/']" href="#services" [class.active]="isActiveHref('services')" (click)="setActiveHref('services')">Services</a>
+					<a pageScroll [routerLink]="['/']" href="#opinions" [class.active]="isActiveHref('opinions')" (click)="setActiveHref('about')">Opinions</a>
 				</li>
 				<li>
 					<a pageScroll [routerLink]="['/']" href="#portfolio" [class.active]="isActiveHref('portfolio')" (click)="setActiveHref('portfolio')">Portfolio</a>
@@ -29,9 +29,14 @@
 				<li>
 					<a pageScroll [routerLink]="['/']" href="#contact" [class.active]="isActiveHref('contact')" (click)="setActiveHref('contact')">Contact</a>
 				</li>
-				<li>
+				<li *ngIf="!authenticated">
 					<a class="nav-login-modal" data-toggle="modal" data-target="#login-modal">
 						<span class="glyphicon glyphicon-log-in"></span>&nbsp;Log in
+					</a>
+				</li>
+				<li *ngIf="authenticated">
+					<a class="nav-login-modal" (click)="onLogoutClick()">
+						<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log out
 					</a>
 				</li>
 			</ul>

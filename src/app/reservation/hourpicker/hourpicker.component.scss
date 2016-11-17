@@ -1,18 +1,62 @@
-$selected-bg-color: rgba(180, 0, 0,0.8);
+$hour-bg-color: rgba(180, 0, 0,0.8);
+$selected-bg-color: rgba(229, 0, 0,0.8);
 .hour{
     color: white;
-    width: 100%;
+    // width: 30%;
     margin-left: auto;
     margin-right: auto;
 }
-.hour :hover{
+span :hover{
     background-color: $selected-bg-color;
 }
-.hour>div{
+// .hour>div{
+//     // background-color: rgba(34,34, 34,0.6);
+//     // margin: 3px;
+// }
+.hour-span{
+    
     padding: 10px;
-    background-color: rgba(34,34, 34,0.6);
-    margin: 3px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+span{
+    border-radius: 5px;
+    background-color: $hour-bg-color;
+    padding: 5px 25px;
+    border: 1px solid transparent;
 }
 .selected{
     background-color: $selected-bg-color!important;
+    border: 1px solid white!important;
+}
+.container{
+    width: 30%; 
+}
+.col-xs-4{
+    padding-left: 0;
+    padding-right: 0;
+}
+@media(max-width: 1150px){
+    .container{
+        width: 40%;
+    }
+}
+@media(max-width: 1090px){
+    .hour{
+        width: 80%;
+    }
+    .container{
+        width: 60%;
+    }
+}
+@media(max-width: 730px){
+    span{
+        padding: 10px;
+    }
+}
+@media(max-width: 600px){
+    .container{
+        width: 100%;
+    }
 }

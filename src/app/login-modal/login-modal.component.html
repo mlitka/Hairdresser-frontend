@@ -1,30 +1,69 @@
 <!-- Modal -->
 <div id="login-modal" class="modal fade" role="dialog">
-	<div class="modal-dialog  modal-sm">
+	<div class="modal-dialog">
 
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<ul class="nav nav-tabs">
+					<li class="active"><a id='a_login' data-toggle="tab" href="#login">Login</a></li>
+					<li><a data-toggle="tab" href="#register">Register</a></li>
+				</ul>
+
 			</div>
-			<div class="modal-body">
-				<p>Login</p>
-				<br>
-				<div class="container">
-					<form #loginForm="ngForm">
-						<div class="form-group" >
-							<label for="username">Email</label>
-							<input type="text" class="form-control" id="username" required [(ngModel)]="model.username" name="username">
-						</div>
-						<div class="form-group" >
-							<label for="password">Password</label>
-							<input type="password" class="form-control" id="password" required [(ngModel)]="model.password" name="password">
-						</div>
-					</form>
+			<div class="modal-body tab-content">
+				<div id="login" class="tab-pane fade in active">
+					<div class="container">
+						<form #loginForm="ngForm">
+							<div class="form-group">
+								<label for="username">Email</label>
+								<input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" id="username" required [(ngModel)]="model_login.username"
+									name="username">
+							</div>
+							<div class="form-group">
+								<label for="password">Password</label>
+								<input type="password" class="form-control" id="password" required [(ngModel)]="model_login.password" name="password">
+							</div>
+						</form>
+					<button type="submit" class="btn btn-default btn-in-modal" data-dismiss="modal" [disabled]="!loginForm.form.valid" (click)="onLoginClick()">Login</button>
+					</div>
+				</div>
+				<div id="register" class="tab-pane fade">
+					<div class="container">
+						<form #registerForm="ngForm">
+							<div class="form-group">
+								<label for="firstName">First name</label>
+								<input type="text" class="form-control" id="firstName" required [(ngModel)]="model_register.firstName" name="firstName">
+							</div>
+							<div class="form-group">
+								<label for="lastName">Last name</label>
+								<input type="text" class="form-control" id="lastName" required [(ngModel)]="model_register.lastName" name="lastName">
+							</div>
+							<div class="form-group">
+								<label for="email">Email</label>
+								<input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" id="email" required [(ngModel)]="model_register.email"
+									name="email">
+							</div>
+							<div class="form-group">
+								<label for="password">Password</label>
+								<input type="password" class="form-control" id="password" required [(ngModel)]="model_register.password" name="password">
+							</div>
+							<div class="form-group">
+								<label for="password">Repeat password</label>
+								<input type="password" class="form-control" id="password" required [(ngModel)]="model_register.password" name="password">
+							</div>
+							<div class="form-group">
+								<label for="phoneNo">Phone No. (Format: 999-999-999)</label>
+								<input type='tel' pattern='\d{3}[\-]\d{3}[\-]\d{3}' class="form-control" id="phoneNo" [(ngModel)]="model_register.phoneNo"
+									name="phoneNo">
+							</div>
+						</form>
+					<button type="submit" class="btn btn-default btn-in-modal" data-dismiss="modal" [disabled]="!registerForm.form.valid" (click)="onRegisterClick()">Register</button>
+					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="submit" class="btn btn-default" data-dismiss="modal" [disabled]="!loginForm.form.valid" (click)="onLoginClick()">Login</button>
 			</div>
 		</div>
 	</div>

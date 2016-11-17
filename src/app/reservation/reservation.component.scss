@@ -1,25 +1,31 @@
 // @import '../schedule/schedule.component.scss';
-$bg-color: #4e4e4e;
+$bg-color: #343434;
 $primary-bg-color: rgb(229,0,0);
 $selected-bg-color: rgba(180, 0, 0,0.8);
 .reservation{
     // padding: 15px;
     background-color: rgba(185, 185, 185, 0.1);    
-    top: 100px;
+    top: 60px;
     position: relative;
     // margin: 1%;
     margin-left: auto;
     margin-right: auto;
     width: 90%;
     // height: 100%;
-    padding: 10px;
+    padding: 5px;
     color: black  !important;
     border-color: #222;
     border-style: solid;
     border-width: 1px;
+    margin-bottom: 60px;
+}
+.container{
+    width: 100%;
 }
 .row{
-    margin-top: 60px;
+    text-align: center;
+    // width: 100%;
+    padding: 5px;
 }
 .btn{
   border-radius: 0;
@@ -45,14 +51,49 @@ $selected-bg-color: rgba(180, 0, 0,0.8);
     // background-size:100%;
     
 }
+#hourpicker{
+    text-align: center;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
 .reservation>.container{
     margin-left: auto;
     margin-right: auto;
     padding: 0;
 }
-@media (max-width: 660px) {
+@media (max-width: 1200px) {
+    .reservation-page{
+        background-image: none;
+    }
     #reserve{
         margin-left: auto;
         margin-right: auto;
+    }
+    .reservation-page{
+        // bottom: 50px;
+    }
+}
+
+@media(max-width: 1090px){
+    .col-lg-12{
+        text-align: center;
+    }
+    .col-md-4, .col-lg-3{
+        text-align: center;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    #datepicker{
+        width: 90%;
+        padding-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #hourpicker{
+        margin-top: 20px;
+    }
+    #reserve{
+        margin-top: 20px;
     }
 }

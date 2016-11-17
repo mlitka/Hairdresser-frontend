@@ -10,12 +10,7 @@ export class HourpickerComponent {
     @Input("visits") visits: VisitProposal[] = [];
     @Output() onChosenHour = new EventEmitter<string>();
     private selectedHour: VisitProposal;
-    // public hours = [
-    //     { time: "15:00" },
-    //     { time: "16:00" },
-    //     { time: "17:00" },
-    //     { time: "18:00" }
-    // ]
+    
     chosenHour(hour: VisitProposal) {
         console.log(hour);
         this.selectedHour = hour;

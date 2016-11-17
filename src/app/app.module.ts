@@ -6,8 +6,10 @@ import { DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { ScheduleModule } from 'primeng/primeng';
+import { RatingModule, ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { MainPageComponent } from './main-page/main-page.component';
+import { RatingStarsComponent } from './main-page/rating-stars/rating-stars.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { MainFooterComponent } from './main-footer/main-footer.component';
 
@@ -21,13 +23,15 @@ import { ImageModal } from './image-popup/angular2-image-popup/angular2-image-po
 import { ImagePopupComponent } from './image-popup/image-popup.component';
 import { HairdresserpickerComponent } from './reservation/hairdresserpicker/hairdresserpicker.component';
 import { ScheduleComponent } from './schedule/schedule.component';
-import { FacebookComponent } from './facebook/facebook.component';
+import { ClientPanelComponent } from './client-panel/client-panel.component';
+import { EventModalComponent } from './schedule/event-modal/event-modal.component';
 
-import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { ConfirmModalComponent } from './reservation/confirm-modal/confirm-modal.component';
 import { LoginModalComponent } from './login-modal/login-modal.component';
 
-import { FacebookService } from 'ng2-facebook-sdk/dist/ng2-facebook-sdk';
 import { HairdresserService } from './common/service/hairdresser.service';
+import { CookieService } from 'angular2-cookie/core';
+
 
 @NgModule({
   imports: [
@@ -39,7 +43,9 @@ import { HairdresserService } from './common/service/hairdresser.service';
     }),
     Ng2PageScrollModule,
     HttpModule,
-    ScheduleModule
+    ScheduleModule,
+    RatingModule,
+    ModalModule 
   ],
   declarations: [
     AppComponent,
@@ -55,14 +61,16 @@ import { HairdresserService } from './common/service/hairdresser.service';
     ImagePopupComponent,
     HairdresserpickerComponent,
     ScheduleComponent,
-    FacebookComponent,
     LoginModalComponent,
-    MainFooterComponent
+    MainFooterComponent,
+    ClientPanelComponent,
+    RatingStarsComponent,
+    EventModalComponent
   ],
   providers: [
-    FacebookService,
     HairdresserService,
-    { provide: XSRFStrategy, useValue: new CookieXSRFStrategy('CSRF-TOKEN', 'X-CSRF-TOKEN') }
+    { provide: XSRFStrategy, useValue: new CookieXSRFStrategy('CSRF-TOKEN', 'X-XSRF-TOKEN') },
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

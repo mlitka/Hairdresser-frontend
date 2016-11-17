@@ -1,5 +1,6 @@
 .modal-body>.container{
     width: inherit;
+    text-align: left;
 }
 
 .ng-valid[required], .ng-valid.required {
@@ -8,4 +9,7 @@
 
 .ng-invalid:not(form)  {
   border-left: 5px solid #a94442; /* red */
+}
+.a_change_form_text{
+  text-align: left;
 }
