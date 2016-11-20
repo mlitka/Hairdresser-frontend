@@ -23,3 +23,4 @@ import 'fullcalendar';
 import 'fullcalendar/dist/fullcalendar.min.css';
 import 'ng2-facebook-sdk/dist/ng2-facebook-sdk';
 import 'angular2-cookie/core'
+import 'angular2-jwt';

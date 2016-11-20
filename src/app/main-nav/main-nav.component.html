@@ -11,8 +11,11 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
-				<li>
+				<li *ngIf="displaySchedule()">
 					<a [routerLink]="['/schedule']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" (click)="setActiveHref('schedule')">Schedule</a>
+				</li>
+				<li *ngIf="displayClientPage()">
+					<a [routerLink]="['/panel']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" (click)="setActiveHref('panel')">My panel</a>
 				</li>
 				<li>
 					<a [routerLink]="['/reservation']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" (click)="setActiveHref('reservation')">Reserve visit</a>
@@ -29,12 +32,12 @@
 				<li>
 					<a pageScroll [routerLink]="['/']" href="#contact" [class.active]="isActiveHref('contact')" (click)="setActiveHref('contact')">Contact</a>
 				</li>
-				<li *ngIf="!authenticated">
+				<li *ngIf="!hairdresserService.authenticated">
 					<a class="nav-login-modal" data-toggle="modal" data-target="#login-modal">
 						<span class="glyphicon glyphicon-log-in"></span>&nbsp;Log in
 					</a>
 				</li>
-				<li *ngIf="authenticated">
+				<li *ngIf="hairdresserService.authenticated">
 					<a class="nav-login-modal" (click)="onLogoutClick()">
 						<span class="glyphicon glyphicon-log-out"></span>&nbsp;Log out
 					</a>

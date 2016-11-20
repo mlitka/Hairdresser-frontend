@@ -1,23 +1,37 @@
-<div class="schedule-page" (window:resize)="onResize($event)">
+<div class="schedule-page">
 	<div class="schedule">
 		<p-schedule [events]="events" [header]="headerConfig" [contentHeight]="aspectRatio" [businessHours]="businessHours" [weekNumbers]="true"
-			[defaultView]="defaultView" [hiddenDays]="hiddenDays" (onEventClick)="eventModal.show()"></p-schedule>
+			[defaultView]="defaultView" [hiddenDays]="hiddenDays" (onEventClick)="handleEventClick($event);eventModal.show()"></p-schedule>
 	</div>
 	<!--<div class="margin-bottom"></div>-->
 </div>
 <!--<event-modal></event-modal>-->
 <!-- Modal -->
-<div id="event-modal" bsModal #eventModal="bs-modal" class="modal fade" role="dialog" aria-hidden="true" >
+<div id="event-modal" bsModal #eventModal="bs-modal" class="modal fade" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
 
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" (click)="eventModal.hide()">&times;</button>
+				<button type="button" class="close" data-dismiss="modal" (click)="eventModal.hide(); onCloseCancel()">&times;</button>
 			</div>
 			<div class="modal-body">
+				<div *ngIf="!cancelSuccess">
+					<h3>{{event.title}}</h3>
+					<h4>{{event.date}}</h4>
+					<p>{{event.start}} - {{event.end}}</p>
+				</div>
+				<div *ngIf="cancelSuccess">
+					<h4>Visit has been successfully deleted</h4>
+				</div>
+				<div *ngIf="cancelReservation">
+					<h4>Are you sure you want to delete this reservation?</h4>
+					<button class="btn" type="button" (click)="onCloseCancel()">No</button>
+					<button class="btn" type="button" (click)="onCancelReservation()">Yes</button>
+				</div>
 			</div>
 			<div class="modal-footer">
+				<a *ngIf="!cancelSuccess" id="a_cancel" (click)="onCancel()">Cancel reservation</a>
 			</div>
 		</div>
 	</div>

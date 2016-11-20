@@ -6,16 +6,10 @@ import { HairdresserService } from './../common/service/hairdresser.service';
     templateUrl: './main-nav.component.html',
     styleUrls: ['main-nav.component.scss']
 })
-export class MainNavComponent implements OnInit {
+export class MainNavComponent {
 
-    public authenticated = false;
 
     constructor(private hairdresserService: HairdresserService) { }
-
-    ngOnInit() {
-        this.authenticated = window.sessionStorage.getItem("authenticated") == null ?
-            false : Boolean(window.sessionStorage.getItem("authenticated"));
-    }
 
     setActiveHref(activeHref: string) {
         window.localStorage.setItem("activeLink", activeHref);
@@ -28,13 +22,14 @@ export class MainNavComponent implements OnInit {
     onLogoutClick() {
         console.log("logging out");
         this.hairdresserService
-            .logout()
-            .subscribe(
-            result => {
-                console.log("logged out");
-                window.sessionStorage.setItem("authenticated", "false");
-            },
-            error => console.error(error)
-            );
+            .logout();
+    }
+
+    displaySchedule():boolean{
+        return this.hairdresserService.authenticated && (this.hairdresserService.auth_role=='ADMIN' || this.hairdresserService.auth_role=='HAIRDRESSER');
+    }
+
+    displayClientPage():boolean{
+        return this.hairdresserService.authenticated && this.hairdresserService.auth_role=='USER'; 
     }
 }

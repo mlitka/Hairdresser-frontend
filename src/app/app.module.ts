@@ -7,6 +7,7 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { ScheduleModule } from 'primeng/primeng';
 import { RatingModule, ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { ReactiveFormsModule }   from '@angular/forms';
 
 import { MainPageComponent } from './main-page/main-page.component';
 import { RatingStarsComponent } from './main-page/rating-stars/rating-stars.component';
@@ -24,13 +25,14 @@ import { ImagePopupComponent } from './image-popup/image-popup.component';
 import { HairdresserpickerComponent } from './reservation/hairdresserpicker/hairdresserpicker.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { ClientPanelComponent } from './client-panel/client-panel.component';
-import { EventModalComponent } from './schedule/event-modal/event-modal.component';
 
 import { ConfirmModalComponent } from './reservation/confirm-modal/confirm-modal.component';
 import { LoginModalComponent } from './login-modal/login-modal.component';
 
 import { HairdresserService } from './common/service/hairdresser.service';
 import { CookieService } from 'angular2-cookie/core';
+import { AUTH_PROVIDERS } from 'angular2-jwt';
+import { AuthClient } from './common/auth/auth.guard';
 
 
 @NgModule({
@@ -45,7 +47,8 @@ import { CookieService } from 'angular2-cookie/core';
     HttpModule,
     ScheduleModule,
     RatingModule,
-    ModalModule 
+    ModalModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AppComponent,
@@ -64,13 +67,14 @@ import { CookieService } from 'angular2-cookie/core';
     LoginModalComponent,
     MainFooterComponent,
     ClientPanelComponent,
-    RatingStarsComponent,
-    EventModalComponent
+    RatingStarsComponent
   ],
   providers: [
     HairdresserService,
     { provide: XSRFStrategy, useValue: new CookieXSRFStrategy('CSRF-TOKEN', 'X-XSRF-TOKEN') },
-    CookieService
+    CookieService,
+    AUTH_PROVIDERS,
+    AuthClient
   ],
   bootstrap: [AppComponent]
 })

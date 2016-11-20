@@ -50,8 +50,9 @@
 								<input type="password" class="form-control" id="password" required [(ngModel)]="model_register.password" name="password">
 							</div>
 							<div class="form-group">
-								<label for="password">Repeat password</label>
-								<input type="password" class="form-control" id="password" required [(ngModel)]="model_register.password" name="password">
+								<label for="password-confirm">Confirm password</label>
+								<input type="password" class="form-control" id="password-confirm" [formControl]="confirmPass" name="password-confirm" >
+								<p>{{confirmPass.status}}</p>
 							</div>
 							<div class="form-group">
 								<label for="phoneNo">Phone No. (Format: 999-999-999)</label>

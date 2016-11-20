@@ -2,40 +2,59 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response, RequestOptions, ResponseOptions } from '@angular/http';
 import { CookieService } from 'angular2-cookie/core';
 import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
 
 import { Hairdresser } from '../model/hairdresser';
 import { HairService } from '../model/hair-service';
 import { VisitProposal } from '../model/visit-proposal';
 import { Visit } from '../model/visit';
+import { Opinion } from '../model/opinion';
 import * as URL_CONST from './url';
+import { AuthHttp, JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class HairdresserService {
 
-    constructor(private http: Http, private cookieService: CookieService) { }
+    private token: any;
+    private jwtHelper: JwtHelper = new JwtHelper();
+    public authenticated = false;
+    public auth_role = "";
+    public auth_user_id = -1;
 
-    getToken(): Observable<any> {
-        let options = new RequestOptions({ withCredentials: true });
-        return this.http.get(URL_CONST.HOME_URL, options).map(this.extractOptions).catch(this.handleError);
+    constructor(private http: Http, private authHttp: AuthHttp, private router: Router) { }
+
+    login(loginData: any) {
+        this.http.post(URL_CONST.LOGIN_URL, loginData)
+            .subscribe(
+            data => {
+                this.token = data
+                // this.useJwtHelper();
+                console.log(this.token._body);
+                localStorage.setItem('id_token', this.token._body);
+                this.manageToken();
+            },
+            err => console.log(err),
+            () => console.log('Request Complete')
+            );
+
     }
 
-    login(loginData: any): Observable<any> {
-        // let token = 'bdf46009f789e0873426fb38c4a984ca8f';
-        // document.cookie = 'CSRF-TOKEN='+token;
-        // 'X-CSRF-TOKEN':token, 'Cookie':
-        // console.log(XSRFStrategy);
-        let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-        let options = new RequestOptions({ headers: headers, withCredentials: true });
-        console.info(options);
-        let body = "username=" + loginData.username + "&password=" + loginData.password;
-        console.log(body);
-        return this.http.post(URL_CONST.LOGIN_URL, body)
-            .map(this.extractData)
-            .catch(this.handleError);
+    manageToken() {
+        var token = localStorage.getItem('id_token');
+        var decoded = this.jwtHelper.decodeToken(token);
+        this.auth_role = decoded.role;
+        this.auth_user_id = decoded.sub;
+        this.authenticated = true;
+        console.log(decoded);
     }
 
-    logout(): Observable<any> {
-        return this.sendGet(URL_CONST.LOGOUT_URL);
+    logout() {
+        // return this.sendGet(URL_CONST.LOGOUT_URL);
+        this.authenticated = false;
+        this.auth_role = "";
+        this.auth_user_id = -1;
+        localStorage.removeItem('id_token');
+        this.router.navigate(['/']);
     }
 
     register(userData: any): Observable<any> {
@@ -52,6 +71,10 @@ export class HairdresserService {
 
     getVisitProposals(hairdresserId: number, serviceId: number, date: string): Observable<VisitProposal[]> {
         return this.sendGet(URL_CONST.VISIT_PROPOSALS_URL(hairdresserId, serviceId, date));
+    }
+
+    getOpinionsCount(count: number): Observable<Opinion[]> {
+        return this.sendGet(URL_CONST.OPINIONS_URL + count.toString());
     }
 
     postReserveVisit(visit: Visit): Observable<any> {
