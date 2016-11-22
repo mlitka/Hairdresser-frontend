@@ -25,25 +25,29 @@ export class ReservationComponent implements OnInit {
             id: 1,
             name: "cutting",
             duration: 30,
-            priceRange: "50-100 PLN"
+            priceRange: "50-100 PLN",
+            hidden:false
         },
         {
             id: 2,
             name: "men cutting",
             duration: 60,
-            priceRange: "40-50 PLN"
+            priceRange: "40-50 PLN",
+            hidden:false
         },
         {
             id: 3,
             name: "coloring+cutting",
             duration: 120,
-            priceRange: "150-200 PLN"
+            priceRange: "150-200 PLN",
+            hidden:false
         },
         {
             id: 4,
             name: "modeling",
             duration: 60,
-            priceRange: "100 PLN"
+            priceRange: "100 PLN",
+            hidden:false
         }
     ];
     public hairdressers: Hairdresser[] = [
@@ -51,13 +55,19 @@ export class ReservationComponent implements OnInit {
             id: 1,
             lastName: 'Fox',
             firstName: 'Henry',
-            img: ''
+            img: '',
+            email:"",
+            shiftStart:'',
+            shiftEnd:''
         },
         {
             id: 2,
             lastName: 'Jane',
             firstName: 'Mary',
-            img: ''
+            img: '',
+            email:"",
+            shiftStart:'',
+            shiftEnd:''
         }
     ];
     public visits: VisitProposal[] = [

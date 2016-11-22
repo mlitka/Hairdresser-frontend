@@ -483,3 +483,9 @@ router-outlet{
 .glyphicon-arrow-right{
   color: white;
 }
+.form-control{
+    background-color: transparent;
+}
+table{
+    color: white;
+}

@@ -6,8 +6,10 @@ import { DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { ScheduleModule } from 'primeng/primeng';
-import { RatingModule, ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
+import { RatingModule, ModalModule, TimepickerModule,   } from 'ng2-bootstrap/ng2-bootstrap';
 import { ReactiveFormsModule }   from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
+import { Ng2TableModule } from 'ng2-table/ng2-table';
 
 import { MainPageComponent } from './main-page/main-page.component';
 import { RatingStarsComponent } from './main-page/rating-stars/rating-stars.component';
@@ -25,6 +27,9 @@ import { ImagePopupComponent } from './image-popup/image-popup.component';
 import { HairdresserpickerComponent } from './reservation/hairdresserpicker/hairdresserpicker.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { ClientPanelComponent } from './client-panel/client-panel.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { Ng2TableComponent, } from './ng2-table/ng2-table.component';
+
 
 import { ConfirmModalComponent } from './reservation/confirm-modal/confirm-modal.component';
 import { LoginModalComponent } from './login-modal/login-modal.component';
@@ -32,7 +37,7 @@ import { LoginModalComponent } from './login-modal/login-modal.component';
 import { HairdresserService } from './common/service/hairdresser.service';
 import { CookieService } from 'angular2-cookie/core';
 import { AUTH_PROVIDERS } from 'angular2-jwt';
-import { AuthClient } from './common/auth/auth.guard';
+import { AuthClient, AuthAdmin, AuthHairdresser } from './common/auth/auth.guard';
 
 
 @NgModule({
@@ -48,7 +53,11 @@ import { AuthClient } from './common/auth/auth.guard';
     ScheduleModule,
     RatingModule,
     ModalModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TimepickerModule,
+    CustomFormsModule,
+    Ng2TableModule
+    
   ],
   declarations: [
     AppComponent,
@@ -67,14 +76,18 @@ import { AuthClient } from './common/auth/auth.guard';
     LoginModalComponent,
     MainFooterComponent,
     ClientPanelComponent,
-    RatingStarsComponent
+    RatingStarsComponent,
+    AdminPanelComponent,
+    Ng2TableComponent
   ],
   providers: [
     HairdresserService,
     { provide: XSRFStrategy, useValue: new CookieXSRFStrategy('CSRF-TOKEN', 'X-XSRF-TOKEN') },
     CookieService,
     AUTH_PROVIDERS,
-    AuthClient
+    AuthClient,
+    AuthAdmin,
+    AuthHairdresser
   ],
   bootstrap: [AppComponent]
 })

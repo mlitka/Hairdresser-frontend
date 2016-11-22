@@ -3,4 +3,7 @@ export class Hairdresser {
     lastName: string;
     firstName: string;
     img: string = "";
+    email:string;
+    shiftStart:string;
+    shiftEnd:string;
 }

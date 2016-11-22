@@ -4,11 +4,11 @@ $hover-color : rgb(229,0,0);
     width: inherit;
 }
 
-.ng-valid[required], .ng-valid.required  {
-  border-left: 5px solid #42A948; /* green */
+.ng-valid[required], .ng-valid.required, .custom-valid {
+  border-left: 5px solid #42A948!important; /* green */
 }
 
-.ng-invalid:not(form)  {
+.ng-invalid:not(form), .custom-invalid {
   border-left: 5px solid #a94442; /* red */
 }
 
@@ -27,4 +27,9 @@ $hover-color : rgb(229,0,0);
 
 a {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.err-form{
+  color: red;
+  font-size: small;
 }

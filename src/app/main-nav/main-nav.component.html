@@ -11,11 +11,17 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
-				<li *ngIf="displaySchedule()">
+				<!--*ngIf="displayAdminPage()"-->
+				<li >
+					<a [routerLink]="['/admin-panel']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" (click)="setActiveHref('admin-panel')">Admin</a>
+				</li>
+				 <!--*ngIf="displaySchedule()"-->
+				<li>
 					<a [routerLink]="['/schedule']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" (click)="setActiveHref('schedule')">Schedule</a>
 				</li>
-				<li *ngIf="displayClientPage()">
-					<a [routerLink]="['/panel']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" (click)="setActiveHref('panel')">My panel</a>
+				<li >
+					<!--*ngIf="displayClientPage()">-->
+					<a [routerLink]="['/client-panel']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" (click)="setActiveHref('client-panel')">My panel</a>
 				</li>
 				<li>
 					<a [routerLink]="['/reservation']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" (click)="setActiveHref('reservation')">Reserve visit</a>

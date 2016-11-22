@@ -3,4 +3,5 @@ export class HairService{
     name: string;
     duration: number;
     priceRange:string;
+    hidden:boolean;
 }

@@ -1,10 +1,124 @@
-<div class="container">
-	<h1>Client panel</h1>
-	<h1>TODO:</h1>
-	<ul>
-		<li>view my upcoming visits</li>
-		<li>view my visits history</li>
-		<li>view my opinions</li>
-		<li>add opinion</li>
-	</ul>
+<div class="page">
+	<div class="panel">
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#upcoming" (click)="getUpcoming()">Upcoming visits</a></li>
+			<li><a data-toggle="tab" href="#history" (click)="getHistory()">History of visits</a></li>
+			<li><a data-toggle="tab" href="#opinions" (click)="getOpinions()">Opinions</a></li>
+		</ul>
+
+
+		<div class="tab-content">
+			<div id="upcoming" class="tab-pane fade in active">
+				<div class="container">
+					<div class="row header">
+						<div class="col-md-3">
+							<h5>When?</h5>
+						</div>
+						<div class="col-md-3 ">
+							<h5>Service:</h5>
+						</div>
+						<div class="col-md-3 ">
+							<h5>Hairdresser:</h5>
+						</div>
+						<div class="col-md-2 a_cancel vcenter">
+
+						</div>
+					</div>
+					<div class="row upcoming-container" *ngFor="let upcoming of upcomingVisits">
+						<div class="col-md-3 upcoming-datetime">
+							<h5>{{upcoming.date}}</h5>
+							<h4>{{upcoming.time}}</h4>
+						</div>
+						<div class="col-md-3 ">
+							<h3>{{upcoming.service}}</h3>
+						</div>
+						<div class="col-md-3 ">
+							<h3>{{upcoming.hairdresser}}</h3>
+						</div>
+						<div class="col-md-2 a_cancel vcenter">
+							<a class="a_cancel" (click)="cancelVisit()">
+								<h5>Cancel</h5>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="history" class="tab-pane fade">
+				<!--<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Service</th>
+								<th>Hairdresser</th>
+								<th>Date</th>
+								<th>Time</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let history of historyVisits; let i=index">
+								<td>{{i+1}}</td>
+								<td>{{history.service}}</td>
+								<td>{{history.hairdresser}}</td>
+								<td>{{history.date}}</td>
+								<td>{{history.time}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>-->
+				<ng2-table></ng2-table>
+			</div>
+			<div id="opinions" class="tab-pane fade">
+				<div class="container">
+					<div class="col-md-3 col-md-6" *ngFor="let opinion of opinions">
+						<div class="text-center">
+							<rating-stars [rate]="opinion.rate"></rating-stars>
+							<p class="opinion-text">{{opinion.text}}</p>
+						</div>
+						<span id="span-author">({{opinion.date}})</span>
+					</div>
+					<br>
+					<br>
+					<button id="add-hairdresser-btn" class="btn btn-default btn-primary" data-toggle="modal" data-target="#add-opinion-modal">Add opinion</button>-->
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+<!-- Modal -->
+<div id="add-opinion-modal" bsModal #addOpinionModal="bs-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<span>Add new opinion</span>
+				<button type="button" class="close" data-dismiss="modal" (click)="addOpinionModal.hide();clearData()">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div *ngIf="!addedOpinion">
+					<rating [(ngModel)]="opinion.rate" [max]="max" [readonly]="false"></rating>
+					<form #opinionForm="ngForm">
+						<div class="form-group">
+							<!--<label for="opinionText">Opinion text</label>-->
+							<textarea rows="4" class="form-control" id="opinionText" required [(ngModel)]="opinion.text" name="opinionText" [rangeLength]="[1, 255]"></textarea>
+						</div>
+
+					</form>
+					<button type="submit" class="btn" [disabled]="!opinionForm.valid" id="a-check" (click)="addOpinion()">Add opinion</button>
+					<br>
+				</div>
+				<div *ngIf="addedOpinion">
+					<h4>Opinion has been successfully added</h4>
+				</div>
+				<div *ngIf="!addedOpinion && opinionFailure">
+					<h4>Could not add opinion</h4>
+				</div>
+			</div>
+			<br>
+			<div class="modal-footer">
+			</div>
+		</div>
+	</div>
+</div>
+<main-footer></main-footer>

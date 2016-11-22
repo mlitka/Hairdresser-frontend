@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
 import { HairdresserService } from './../common/service/hairdresser.service';
 import { User } from './../common/model/user';
 
@@ -15,7 +14,7 @@ export class LoginModalComponent {
 
     public model_login = new User();
     public model_register = new User();
-    public confirmPass = new FormControl(this.model_register.password, Validators.required);
+ 
 
     onLoginClick() {
         console.log(this.model_login);
@@ -37,4 +36,15 @@ export class LoginModalComponent {
             error => console.error(error)
             );
     }
+
+    passwordMatch():boolean{
+        return this.model_register.passwordConfirm!=undefined && this.model_register.password===this.model_register.passwordConfirm;
+    }
+
+    resetData(){
+        this.model_login = new User();
+        this.model_register = new User();
+    }
+
 }
+

@@ -7,5 +7,6 @@ import { Component, Input } from '@angular/core';
 })
 export class RatingStarsComponent {
     public max = 5;
+    @Input('isReadonly') isReadonly = true;
     @Input('rate') rate = 3;
 }

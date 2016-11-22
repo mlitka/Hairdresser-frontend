@@ -1,3 +1,42 @@
-h1, li{
+@import '../admin-panel/admin-panel.component';
+
+#add-hairdresser-btn{
+    margin-top: 20px;
+}
+
+rating{
+    float: right;
+}
+#upcoming{
     color: white;
+}
+
+.upcoming-container{
+    padding: 5px;
+    background-color: rgba(150,0,0,0.4);
+}
+.upcoming-datetime{
+    text-align: center;
+    background-color: rgba(34,34,34,0.6);
+    // margin: 5px;
+    border-radius: 5px;
+}
+.vcenter {
+    // display: inline-block;
+    vertical-align: middle;
+    // float: none;
+}
+.a_cancel{
+    float: right;
+    // vertical-align: middle;
+}
+.row{
+    margin-left: 0;
+    margin-right: 0;
+    width: inherit;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.header{
+    border-bottom: 2px solid white;
 }

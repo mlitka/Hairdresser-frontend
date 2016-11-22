@@ -32,4 +32,8 @@ export class MainNavComponent {
     displayClientPage():boolean{
         return this.hairdresserService.authenticated && this.hairdresserService.auth_role=='USER'; 
     }
+
+    displayAdminPage():boolean{
+        return this.hairdresserService.authenticated && this.hairdresserService.auth_role=='ADMIN'; 
+    }
 }

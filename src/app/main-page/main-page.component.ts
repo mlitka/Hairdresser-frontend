@@ -10,53 +10,61 @@ import { HairdresserService } from './../common/service/hairdresser.service';
 })
 export class MainPageComponent implements OnInit {
     public opinions: Opinion[] = [
-            {
-                author: 'Emma White',
-                rate: 5,
-                text: 'Best hair salon in the city!'
-            },
-            {
-                author: 'John Snow',
-                rate: 4,
-                text: 'I always come back there.'
-            },
-            {
-                author: 'Jessica Huggs',
-                rate: 5,
-                text: 'They do coloring perfectly.'
-            },
-            {
-                author: 'Veronica Grey',
-                rate: 5,
-                text: 'I will always recommend this salon.'
-            }
-        ];
+        {
+            author: 'Emma White',
+            rate: 5,
+            text: 'Best hair salon in the city!',
+            date: "2016-11-20"
+        },
+        {
+            author: 'John Snow',
+            rate: 4,
+            text: 'I always come back there.',
+            date: "2016-11-20"
+        },
+        {
+            author: 'Jessica Huggs',
+            rate: 5,
+            text: 'They do coloring perfectly.',
+            date: "2016-11-20"
+        },
+        {
+            author: 'Veronica Grey',
+            rate: 5,
+            text: 'I will always recommend this salon.',
+            date: "2016-11-20"
+        }
+    ];
     public services: HairService[] = [
-            {
-                id: 1,
-                name: "cutting",
-                duration: 30,
-                priceRange: "50-100 PLN"
-            },
-            {
-                id: 2,
-                name: "men cutting",
-                duration: 60,
-                priceRange: "40-50 PLN"
-            },
-            {
-                id: 3,
-                name: "coloring+cutting",
-                duration: 120,
-                priceRange: "150-200 PLN"
-            },
-            {
-                id: 4,
-                name: "modeling",
-                duration: 60,
-                priceRange: "100 PLN"
-            }
-        ];
+        {
+            id: 1,
+            name: "cutting",
+            duration: 30,
+            priceRange: "50-100 PLN",
+            hidden:false
+        },
+        {
+            id: 2,
+            name: "men cutting",
+            duration: 60,
+            priceRange: "40-50 PLN",
+            hidden:false
+        },
+        {
+            id: 3,
+            name: "coloring+cutting",
+            duration: 120,
+            priceRange: "150-200 PLN",
+            hidden:false
+        },
+        {
+            id: 4,
+            name: "modeling",
+            duration: 60,
+            priceRange: "100 PLN",
+            hidden:false
+        }
+    ];
     private opinionsCount = 4;
 
     constructor(private hairdresserService: HairdresserService) { }

@@ -1,0 +1,187 @@
+<div class="page">
+	<div class="panel">
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#hairdressers" (click)="getHairdressers()">Hairdressers</a></li>
+			<li><a data-toggle="tab" href="#services" (click)="getServices()">Services</a></li>
+			<li><a data-toggle="tab" href="#opinions" (click)="getOpinions()">Opinions</a></li>
+		</ul>
+
+
+		<div class="tab-content">
+			<div id="hairdressers" class="tab-pane fade in active">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Firstname</th>
+								<th>Lastname</th>
+								<th>Email</th>
+								<th>Shift start</th>
+								<th>Shift end</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let hairdresser of hairdressers; let i=index">
+								<td>{{i+1}}</td>
+								<td>{{hairdresser.firstName}}</td>
+								<td>{{hairdresser.lastName}}</td>
+								<td>{{hairdresser.email}}</td>
+								<td>{{hairdresser.shiftStart}}</td>
+								<td>{{hairdresser.shiftEnd}}</td>
+							</tr>
+						</tbody>
+					</table>
+					<button id="add-hairdresser-btn" class="btn btn-default btn-primary" data-toggle="modal" data-target="#add-hairdresser-modal"
+						(click)="openingModal()">Add hairdresser</button>
+				</div>
+			</div>
+			<div id="services" class="tab-pane fade">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Name</th>
+								<th>Duration (minutes)</th>
+								<th>Price range</th>
+								<th>Visibility</th>
+								<th>Show/hide</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let service of services; let i=index">
+								<td>{{i+1}}</td>
+								<td>{{service.name}}</td>
+								<td>{{service.duration}}</td>
+								<td>{{service.priceRange}}</td>
+								<td>
+									<span *ngIf="service.hidden">Hidden</span>
+									<span *ngIf="!service.hidden">Visible</span>
+								</td>
+								<td>
+									<a (click)="showOrHideService(service)">
+										<span *ngIf="service.hidden" class="glyphicon glyphicon-ok"></span>
+										<span *ngIf="!service.hidden" class="glyphicon glyphicon-remove"></span>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<button id="add-hairdresser-btn" class="btn btn-default btn-primary" (click)="addServiceModal.show();openServiceModal()">
+                     Add service</button>
+				</div>
+			</div>
+			<div id="opinions" class="tab-pane fade">
+				<div class="container">
+					<div class="col-md-3 col-md-6" *ngFor="let opinion of opinions">
+						<div class="text-center">
+							<rating-stars [rate]="opinion.rate"></rating-stars>
+							<p class="opinion-text">{{opinion.text}}</p>
+						</div>
+						<span id="span-author">({{opinion.date}})&nbsp;&nbsp;{{opinion.author}}</span>
+					</div>
+					<br>
+					<br>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Modal -->
+<div id="add-hairdresser-modal" bsModal #addModal="bs-modal" class="modal fade" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" (click)="addModal.hide()">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div *ngIf="!addedHairdresser">
+					<form #hairdresserForm="ngForm">
+						<div class="form-group">
+							<label for="username">Email</label>
+							<input type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" id="username" required [(ngModel)]="hairdresser"
+								name="username" [disabled]="userExists">
+						</div>
+
+						<button type="submit" class="btn" [disabled]="!hairdresserForm.valid || userExists" id="a-check" (click)="checkEmail()">Check Email</button>
+					</form>
+					<!--<div class="form-group" *ngIf="userExists">
+							<label>Shift start</label>
+							<timepicker [(ngModel)]="shiftStart" [hourStep]="hstep" [minuteStep]="mstep" [showMeridian]="ismeridian"
+								[readonlyInput]="!isEnabled"></timepicker>
+						</div>
+						<div class="form-group" *ngIf="userExists">
+							<label>Shift end</label>
+							<timepicker [(ngModel)]="shiftEnd" [hourStep]="hstep" [minuteStep]="mstep" [showMeridian]="ismeridian"
+								[readonlyInput]="!isEnabled"></timepicker>
+						</div>-->
+					<br>
+					<br>
+					<div *ngIf="userExists">
+						<p>User with given email exists in the system.</p><br>
+						<p>Now you can upgrate this account to type pf HAIRDRESSER</p>
+					</div>
+				</div>
+				<div *ngIf="addedHairdresser && success">
+					<h4>hairdresser has been successfully added</h4>
+				</div>
+				<div *ngIf="!success && addedHairdresser">
+					<h4>Could not add hairdresser</h4>
+				</div>
+			</div>
+			<br>
+			<div class="modal-footer">
+				<button [disabled]="!userExists" *ngIf="!success" class="btn" type="submit" (click)="onAddHairdresser()">Add</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+<div id="add-service-modal" bsModal #addServiceModal="bs-modal" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-sm">
+
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" (click)="addServiceModal.hide()">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div *ngIf="!addedService">
+					<form #serviceForm="ngForm">
+						<div class="form-group">
+							<label for="name">Service name</label>
+							<input type="text" class="form-control" id="name" required [(ngModel)]="hairService.name" name="name">
+						</div>
+						<div class="form-group">
+							<label for="duration">Duration in minutes [30, 150]</label>
+							<input type="number" [range]="[30, 150]" class="form-control" id="duration" required [(ngModel)]="hairService.duration" name="duration">
+						</div>
+						<div class="form-group">
+							<label for="priceRange">Price range</label>
+							<input type="text" class="form-control" id="priceRange" required [(ngModel)]="hairService.priceRange" name="priceRange">
+						</div>
+
+
+					</form>
+					<button type="submit" class="btn" [disabled]="!serviceForm.valid" id="a-check" (click)="addService()">Add service</button>
+					<br>
+				</div>
+				<div *ngIf="addedService">
+					<h4>Service has been successfully added</h4>
+				</div>
+				<div *ngIf="!addedService && serviceFailure">
+					<h4>Could not add service</h4>
+				</div>
+			</div>
+			<br>
+			<div class="modal-footer">
+			</div>
+		</div>
+	</div>
+</div>
+
+<main-footer></main-footer>
