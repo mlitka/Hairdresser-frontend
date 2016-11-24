@@ -5,21 +5,23 @@
 				<div class="col-md-4" >
 					<my-servicepicker (onChosenService)="onChosenService($event)" [services]="services"></my-servicepicker>
 				</div>
-				<div id="datepicker" class="col-md-4">
+				<div id="datepicker" class="col-md-4" *ngIf="chosenService">
 					<my-datepicker (onChosenDate)="onChosenDate($event)"></my-datepicker>
 				</div>
-				<div class="col-md-4" *ngIf="chosenService">
+			<!--</div>-->
+			<!--<div class="row">-->
+				<div class="col-md-4" *ngIf="chosenDateInChild">
 					<my-hairdresserpicker (onChosenHairdresser)="onChosenHairdresser($event)" [hairdressers]="hairdressers"></my-hairdresserpicker>
 				</div>
-			</div>
-			<div class="row">
-				<div id="hourpicker" class="container" *ngIf="chosenHairdresser">
+				<div class="col-md-12" *ngIf="chosenHairdresser && chosenDateInChild">
+				
+				<!--<div id="hourpicker" class="container" *ngIf="chosenHairdresser">-->
 					<my-hourpicker [visits]="visits" (onChosenHour)="onChosenHour($event)"></my-hourpicker>
 				</div>
 			</div>
 			<div class="row">
 				<div><button id="reserve" class="btn btn-primary" data-toggle="modal" data-target="#confirm-modal" (click)="onReserveClick()">RESERVE VISIT</button></div>
-				<confirm-modal [modalContent]="modalContent" [reservationEnabled]="reservationEnabled" [authenticated]="authenticated" (onConfirm)="onModalConfirm($event)"></confirm-modal>
+				<confirm-modal [chosenService]="chosenService" [chosenHairdresser]="chosenHairdresser" [chosenDate]="prepareDate(chosenDate)" [chosenTime]="chosenHour" [reservationEnabled]="reservationEnabled" [authenticated]="hairdresserService.authenticated" (onConfirm)="onModalConfirm($event)"></confirm-modal>
 			</div>
 		</div>
 		<br>

@@ -1,1 +1,20 @@
-$primary-bg-color: rgb(229,0,0);
+$primary-color: rgb(180,0,0);
+$primary-lighter-color: rgb(210,0,0);
+.date{
+    color: white; 
+    font-weight: 700;
+    font-size: large;
+    background-color: rgba(255,255,255,0.3);
+    border: 1px solid $primary-color;
+}
+ .popup {
+      position: absolute;
+      background-color: #fff;
+      border-radius: 3px;
+      border: 1px solid #ddd;
+      height: 251px;
+    }
+.datepicker-div{
+    display:inline-block; 
+    min-height:290px;
+}

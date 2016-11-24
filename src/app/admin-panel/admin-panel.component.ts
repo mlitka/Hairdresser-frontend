@@ -33,25 +33,29 @@ export class AdminPanelComponent implements OnInit {
             author: 'Emma White',
             rate: 5,
             text: 'Best hair salon in the city!',
-            date: "2016-11-20"
+            dateTime: new Date(),
+            userId: 1
         },
         {
             author: 'John Snow',
             rate: 4,
             text: 'I always come back there.',
-            date: "2016-11-20"
+            dateTime: new Date(),
+            userId: 1
         },
         {
             author: 'Jessica Huggs',
             rate: 5,
             text: 'They do coloring perfectly.',
-            date: "2016-11-20"
+            dateTime: new Date(),
+            userId: 1
         },
         {
             author: 'Veronica Grey',
             rate: 5,
             text: 'I will always recommend this salon.',
-            date: "2016-11-20"
+            dateTime: new Date(),
+            userId: 1
         }
     ];
 
@@ -111,6 +115,7 @@ export class AdminPanelComponent implements OnInit {
 
     ngOnInit() {
         this.getHairdressers();
+        // this.getServices();
     }
 
     checkEmail() {
@@ -161,7 +166,7 @@ export class AdminPanelComponent implements OnInit {
     }
 
     getServices() {
-        this.hairdresserService.getHairServices()
+        this.hairdresserService.getAuthHairServices()
             .subscribe(
             services => this.services = services,
             error => { }

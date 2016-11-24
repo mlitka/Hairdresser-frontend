@@ -1,11 +1,20 @@
- 
-  <!--<pre class="card card-block card-header">Selected date is: <em *ngIf="dt">{{ getDate() | date:'fullDate'}}</em></pre>-->
-  <div class="datepicker-div" style="display:inline-block; min-height:290px;">
-    <datepicker [(ngModel)]="dt" [minDate]="minDate" [showWeeks]="true" (ngModelChange)="onChange($event)"></datepicker>
-  </div>
+<!--<pre class="card card-block card-header">Selected date is: <em *ngIf="dt">{{ getDate() | date:'fullDate'}}</em></pre>-->
+<input [(ngModel)]="displayDate" class="form-control date" (click)="showPopup()" />
+<div class="datepicker-div" style="display:inline-block; min-height:290px;"  >
+	<datepicker [hidden]="!showDatepicker" [(ngModel)]="dt" [minDate]="minDate" [showWeeks]="true" (ngModelChange)="onChange($event)"></datepicker>
+	<!--<datepicker class="popup"  *ngIf="showDatepicker" [(ngModel)]="dt" [showWeeks]="true" (ngModelChange)="hidePopup($event)" ></datepicker>-->
+</div>
+<!--<div class="datepicker-div">-->
+<!--<datetime [(ngModel)]="dt" (ngModelChange)="onChange($event)" [calendarWeeks]="true" [daysOfWeekDisabled]="[0,6]"></datetime>-->
+<!--</div>-->
+<!--<div class="input-group date" data-provide="datepicker">
+    <input #datePicker id="datePicker"  type="text" class="form-control" value="12-02-2012" [calendarWeeks]="true" [daysOfWeekDisabled]="[0,6]">
+    <div class="input-group-addon">
+        <span class="glyphicon glyphicon-th"></span>-->
+<!--</div>-->
+<!--</div>-->
 
-
-  <!--<button type="button" class="btn btn-sm btn-info" (click)="today()">Today</button>
+<!--<button type="button" class="btn btn-sm btn-info" (click)="today()">Today</button>
   <button type="button" class="btn btn-sm btn-default btn-secondary" (click)="d20090824();">2009-08-24</button>
   <button type="button" class="btn btn-sm btn-danger" (click)="clear()">Clear</button>
   <button type="button" class="btn btn-sm btn-default btn-secondary" (click)="toggleMin()" tooltip="After today restriction">Min date</button>-->

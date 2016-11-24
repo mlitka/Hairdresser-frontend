@@ -19,6 +19,7 @@ export class ReservationComponent implements OnInit {
     public modalContent = 'Confirm reservation';
     public reservationEnabled = false;
     public authenticated: boolean = true;
+    public chosenDateInChild:boolean = false;
 
     public services: HairService[] = [
         {
@@ -146,6 +147,7 @@ export class ReservationComponent implements OnInit {
     onChosenDate(date: Date) {
         console.log("event");
         console.log("chosen date got in parent: " + this.prepareDate(date));
+        this.chosenDateInChild = true;
         this.chosenDate = date;
         this.getVisitProposals();
     }
@@ -200,12 +202,13 @@ export class ReservationComponent implements OnInit {
             this.reservationEnabled = true;
             console.log("OK");
             console.log(this.prepareDate(this.chosenDate) + " " + this.chosenHairdresser.lastName + " " + this.chosenService.name + " " + this.chosenHour);
-            this.modalContent = "You are about to confirm reservation on "
-                + this.chosenService.name + " service to "
-                + this.chosenHairdresser.lastName + " "
-                + this.chosenHairdresser.firstName + " on "
+            this.modalContent = "You are about to confirm reservation on \n"
+                + this.chosenService.name + "\n to"
+                + this.chosenHairdresser.firstName + " "
+                + this.chosenHairdresser.lastName + "\non\n"
                 + this.prepareDate(this.chosenDate) + " at "
                 + this.chosenHour;
+            this.modalContent = this.modalContent.replace(/\n/g, "<br />");
             let visit = new Visit();
             visit.date = this.prepareDate(this.chosenDate);
             visit.hairdresserId = this.chosenHairdresser.id;

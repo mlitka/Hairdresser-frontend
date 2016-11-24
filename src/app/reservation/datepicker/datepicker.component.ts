@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
@@ -6,7 +6,7 @@ import * as moment from 'moment';
   templateUrl: './datepicker.component.html',
   styleUrls: ['./datepicker.component.scss']
 })
-export class DatepickerComponent {
+export class DatepickerComponent implements OnInit {
   @Output() onChosenDate = new EventEmitter<string>();
   public dt: Date = new Date();
   public minDate: Date = void 0;
@@ -20,6 +20,8 @@ export class DatepickerComponent {
     startingDay: 1
   };
   private opened: boolean = false;
+  private showDatepicker = false;
+  public displayDate = 'Choose date of your visit';
 
   public constructor() {
     (this.tomorrow = new Date()).setDate(this.tomorrow.getDate() + 1);
@@ -30,6 +32,12 @@ export class DatepickerComponent {
       { date: this.afterTomorrow, status: 'partially' }
     ];
     this.toggleMin();
+  }
+
+  ngOnInit() {
+    // $('.datePicker').datepicker({
+    //   daysOfWeekDisabled: "0,6"
+    // });
   }
 
   public getDate(): number {
@@ -77,7 +85,27 @@ export class DatepickerComponent {
     this.dt = new Date(this.minDate.valueOf());
   }
 
-  public onChange(date:any){
-    this.onChosenDate.emit(date);
+  public onChange(date: any) {
+    // this.hidePopup();
+    if (this.showDatepicker) {
+      this.displayDate = this.prepareDate(date);
+      this.onChosenDate.emit(date);
+    }
+  }
+
+  public showPopup() {
+    this.showDatepicker = true;
+  }
+
+  hidePopup() {
+    this.showDatepicker = false;
+    // this.dateModel = event;
+    // this.dateModelChange.emit(event)
+  }
+
+  private prepareDate(date: Date): string {
+    let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+    let month = date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth();
+    return date.getFullYear() + "-" + month + "-" + day;
   }
 }

@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { User } from '../../common/model/user';
+import { Hairdresser } from '../../common/model/hairdresser';
+import { HairService } from '../../common/model/hair-service';
 
 @Component({
     selector: 'confirm-modal',
@@ -7,7 +9,10 @@ import { User } from '../../common/model/user';
     styleUrls: ['confirm-modal.component.scss']
 })
 export class ConfirmModalComponent implements OnInit {
-    @Input() modalContent: string;
+    @Input() chosenService: HairService;
+    @Input() chosenHairdresser: Hairdresser;
+    @Input() chosenDate: string;
+    @Input() chosenTime: string;
     @Input() authenticated: boolean;
     @Input() reservationEnabled: boolean;
     @Output() onConfirm = new EventEmitter<User>();

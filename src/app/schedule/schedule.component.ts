@@ -139,6 +139,7 @@ export class ScheduleComponent implements OnInit {
             result => {
                 this.cancelReservation = false;
                 this.cancelSuccess = true;
+                this.getVisits();
             },
             error => {
                 console.log(error);

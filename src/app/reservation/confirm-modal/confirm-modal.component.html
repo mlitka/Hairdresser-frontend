@@ -9,7 +9,13 @@
 				<!--<h4 class="modal-">Modal Header</h4>-->
 			</div>
 			<div class="modal-body">
-				<p *ngIf="reservationEnabled">{{modalContent}}</p>
+				<div id="modalContent" *ngIf="reservationEnabled"> 
+				<h4>You are about to confirm reservation on</h4>
+				<h4>{{chosenService.name}}</h4>
+				<h4>to&nbsp;{{chosenHairdresser.firstName}}&nbsp;{{chosenHairdresser.lastName}}</h4>
+				<h4>on&nbsp;{{chosenDate}}&nbsp;{{chosenTime}}</h4>
+
+				</div>
 				<p *ngIf="!reservationEnabled">Missing reservation data!<br>Close modal and try to choose data again on reservation page</p>
 				<br>
 				<div class="container"  [hidden]="!reservationEnabled">
@@ -38,7 +44,7 @@
 				</div>
 			</div>
 			<div class="modal-footer" [hidden]="!reservationEnabled">
-				<a  (click)="onChangeForm()"><p>{{a_change_form_text}}</a>
+				<a *ngIf="authenticated" (click)="onChangeForm()"><p>{{a_change_form_text}}</a>
 				<button  type="submit" class="btn btn-default" data-dismiss="modal" [disabled]="!userForm.form.valid" (click)="onConfirmClick()">Confirm</button>
 			</div>
 		</div>

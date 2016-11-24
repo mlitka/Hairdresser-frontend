@@ -1,4 +1,5 @@
 @import '../admin-panel/admin-panel.component';
+@import '../schedule/schedule.component';
 
 #add-hairdresser-btn{
     margin-top: 20px;
@@ -13,13 +14,14 @@ rating{
 
 .upcoming-container{
     padding: 5px;
-    background-color: rgba(150,0,0,0.4);
+    // background-color: rgba(150,0,0,0.4);
+    border-bottom: 1px solid white;
 }
 .upcoming-datetime{
     text-align: center;
-    background-color: rgba(34,34,34,0.6);
+    background-color: rgba(255, 0, 0, 0.2);;
     // margin: 5px;
-    border-radius: 5px;
+    // border-radius: 5px;
 }
 .vcenter {
     // display: inline-block;
@@ -29,6 +31,9 @@ rating{
 .a_cancel{
     float: right;
     // vertical-align: middle;
+}
+#a_cancel_modal{
+    color: rgb(229,0,0);
 }
 .row{
     margin-left: 0;

@@ -6,8 +6,8 @@ import { DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { ScheduleModule } from 'primeng/primeng';
-import { RatingModule, ModalModule, TimepickerModule,   } from 'ng2-bootstrap/ng2-bootstrap';
-import { ReactiveFormsModule }   from '@angular/forms';
+import { RatingModule, ModalModule, TimepickerModule, } from 'ng2-bootstrap/ng2-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { Ng2TableModule } from 'ng2-table/ng2-table';
 
@@ -56,8 +56,7 @@ import { AuthClient, AuthAdmin, AuthHairdresser } from './common/auth/auth.guard
     ReactiveFormsModule,
     TimepickerModule,
     CustomFormsModule,
-    Ng2TableModule
-    
+    Ng2TableModule,
   ],
   declarations: [
     AppComponent,
@@ -78,11 +77,11 @@ import { AuthClient, AuthAdmin, AuthHairdresser } from './common/auth/auth.guard
     ClientPanelComponent,
     RatingStarsComponent,
     AdminPanelComponent,
-    Ng2TableComponent
+    Ng2TableComponent,
   ],
   providers: [
     HairdresserService,
-    { provide: XSRFStrategy, useValue: new CookieXSRFStrategy('CSRF-TOKEN', 'X-XSRF-TOKEN') },
+    // { provide: XSRFStrategy, useValue: new CookieXSRFStrategy('CSRF-TOKEN', 'X-XSRF-TOKEN') },
     CookieService,
     AUTH_PROVIDERS,
     AuthClient,
