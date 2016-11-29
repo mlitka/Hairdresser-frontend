@@ -12,7 +12,7 @@
 				<div class="container">
 					<div class="row header">
 						<div class="col-md-3">
-							<h5>When?</h5>
+							<h5>Date and time</h5>
 						</div>
 						<div class="col-md-3 ">
 							<h5>Service:</h5>
@@ -41,10 +41,11 @@
 							</a>
 						</div>
 					</div>
+				<div class="container" *ngIf="upcomingVisits.length==0"><span >No opinions found</span></div>
 				</div>
 			</div>
 			<div id="history" class="tab-pane fade">
-				<!--<div class="table-responsive">
+				<!--<div class="table-responsive" >
 					<table class="table">
 						<thead>
 							<tr>
@@ -65,8 +66,13 @@
 							</tr>
 						</tbody>
 					</table>
-				</div>-->
-				<ng2-table></ng2-table>
+				<div class="container"><span class="not-found" *ngIf="historyVisits.length==0">No history of visits found</span></div>-->
+				<input class="form-control" id="gb" #gb type="text" placeholder="Search">
+					<p-dataTable [value]="historyVisits" sortField="date" [rows]="10" [paginator]="true" [globalFilter]="gb">
+						<p-column *ngFor="let col of cols" sortable="true" [field]="col.field" [header]="col.header"></p-column>
+					</p-dataTable>
+				<!--</div>-->
+				<!--<ng2-table [columns]="columns" [config]="config" [data]="historyVisits" *ngIf="historyVisits.length>0"></ng2-table>-->
 			</div>
 			<div id="opinions" class="tab-pane fade">
 				<div class="container">
@@ -76,10 +82,11 @@
 							<p class="opinion-text">{{opinion.text}}</p>
 						</div>
 						<span id="span-author">({{opinion.date}})</span>
+					<br>
 					</div>
 					<br>
-					<br>
-					<button id="add-hairdresser-btn" class="btn btn-default btn-primary" data-toggle="modal" data-target="#add-opinion-modal">Add opinion</button>-->
+				<div class="container"><span class="not-found" *ngIf="opinions.length==0">No opinions found</span></div>
+					<button id="add-hairdresser-btn" class="btn btn-default btn-primary" data-toggle="modal" data-target="#add-opinion-modal">Add opinion</button>
 				</div>
 			</div>
 		</div>
@@ -134,7 +141,7 @@
 				<div *ngIf="!cancelSuccess">
 					<h3>{{event.service}}</h3>
 					<h4>{{event.hairdresser}}</h4>
-					<p>{{event.date}} {{event.time}}</p>
+					<p>({{event.date}}) {{event.time}}</p>
 				</div>
 				<div *ngIf="cancelSuccess">
 					<h4>Visit has been successfully deleted</h4>

@@ -11,16 +11,13 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
-				<!--*ngIf="displayAdminPage()"-->
-				<li >
+				<li *ngIf="displayAdminPage()">
 					<a [routerLink]="['/admin-panel']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" (click)="setActiveHref('admin-panel')">Admin</a>
-				</li>
-				 <!--*ngIf="displaySchedule()"-->
-				<li>
+				</li >
+				<li *ngIf="displaySchedule()">
 					<a [routerLink]="['/schedule']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" (click)="setActiveHref('schedule')">Schedule</a>
 				</li>
-				<li >
-					<!--*ngIf="displayClientPage()">-->
+				<li *ngIf="displayClientPage()">
 					<a [routerLink]="['/client-panel']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }" (click)="setActiveHref('client-panel')">My panel</a>
 				</li>
 				<li>

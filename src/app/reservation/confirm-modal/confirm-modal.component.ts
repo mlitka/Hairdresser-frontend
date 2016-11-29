@@ -15,14 +15,16 @@ export class ConfirmModalComponent implements OnInit {
     @Input() chosenTime: string;
     @Input() authenticated: boolean;
     @Input() reservationEnabled: boolean;
+    @Input() model:User;
     @Output() onConfirm = new EventEmitter<User>();
 
-    public model = new User();
+    // public model = new User();
     public diffClient = false;
     public a_change_form_text:string;
     
     ngOnInit(){
         this.set_a_change_form_text();
+        this.model = new User();
     }
 
     onConfirmClick() {
@@ -32,6 +34,7 @@ export class ConfirmModalComponent implements OnInit {
     onChangeForm(){
         this.diffClient = !this.diffClient;
         this.set_a_change_form_text();
+        this.model = new User();
         console.log("on change form");
         console.log(this.diffClient);
         console.log(this.a_change_form_text);

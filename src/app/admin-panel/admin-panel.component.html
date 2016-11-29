@@ -9,8 +9,9 @@
 
 		<div class="tab-content">
 			<div id="hairdressers" class="tab-pane fade in active">
+				<!--<ng2-table [columns]="columns" [config]="config" [data]="data"></ng2-table>-->
 				<div class="table-responsive">
-					<table class="table">
+					<!--<table class="table">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -27,18 +28,25 @@
 								<td>{{hairdresser.firstName}}</td>
 								<td>{{hairdresser.lastName}}</td>
 								<td>{{hairdresser.email}}</td>
-								<td>{{hairdresser.shiftStart}}</td>
-								<td>{{hairdresser.shiftEnd}}</td>
+								<td>{{hairdresser.shiftStart.hour}}:00</td>
+								<td>{{hairdresser.shiftEnd.hour}}:00</td>
 							</tr>
 						</tbody>
 					</table>
+					<div class="container"><span class="not-found" *ngIf="hairdressers.length==0">No hairdressers found</span></div>-->
+					<input class="form-control" id="gb" #gb type="text" placeholder="Search">
+					<p-dataTable [value]="hairdressers" sortField="lastName" [rows]="10" [paginator]="true" [globalFilter]="gb">
+						<p-column *ngFor="let col of cols" sortable="true" [field]="col.field" [header]="col.header"></p-column>
+					</p-dataTable>
+					<br>
+					<br>
 					<button id="add-hairdresser-btn" class="btn btn-default btn-primary" data-toggle="modal" data-target="#add-hairdresser-modal"
 						(click)="openingModal()">Add hairdresser</button>
 				</div>
 			</div>
 			<div id="services" class="tab-pane fade">
 				<div class="table-responsive">
-					<table class="table">
+					<!--<table class="table">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -68,12 +76,20 @@
 							</tr>
 						</tbody>
 					</table>
-					<button id="add-hairdresser-btn" class="btn btn-default btn-primary" (click)="addServiceModal.show();openServiceModal()">
+					<div class="container"><span class="not-found" *ngIf="services.length==0">No services found</span></div>-->
+					<input class="form-control" id="gb" #gb type="text" placeholder="Search">
+					<p-dataTable [value]="services" sortField="name" [rows]="10" [paginator]="true" [globalFilter]="gb" (onRowClick)="showOrHideService($event)">
+						<p-column *ngFor="let col of cols_services" sortable="true" [field]="col.field" [header]="col.header"></p-column>
+					</p-dataTable>
+					<br>
+					<br>
+					<button id="add-hairdresser-btn" class="btn btn-default btn-primary" data-toggle="modal" data-target="#add-service-modal"
+						(click)="openServiceModal()">
                      Add service</button>
 				</div>
 			</div>
 			<div id="opinions" class="tab-pane fade">
-				<div class="container">
+				<div class="container" *ngIf="opinions.length>0">
 					<div class="col-md-3 col-md-6" *ngFor="let opinion of opinions">
 						<div class="text-center">
 							<rating-stars [rate]="opinion.rate"></rating-stars>
@@ -84,6 +100,7 @@
 					<br>
 					<br>
 				</div>
+				<div class="container"><span class="not-found" *ngIf="opinions.length==0">No opinions found</span></div>
 			</div>
 		</div>
 	</div>
@@ -106,18 +123,8 @@
 								name="username" [disabled]="userExists">
 						</div>
 
-						<button type="submit" class="btn" [disabled]="!hairdresserForm.valid || userExists" id="a-check" (click)="checkEmail()">Check Email</button>
 					</form>
-					<!--<div class="form-group" *ngIf="userExists">
-							<label>Shift start</label>
-							<timepicker [(ngModel)]="shiftStart" [hourStep]="hstep" [minuteStep]="mstep" [showMeridian]="ismeridian"
-								[readonlyInput]="!isEnabled"></timepicker>
-						</div>
-						<div class="form-group" *ngIf="userExists">
-							<label>Shift end</label>
-							<timepicker [(ngModel)]="shiftEnd" [hourStep]="hstep" [minuteStep]="mstep" [showMeridian]="ismeridian"
-								[readonlyInput]="!isEnabled"></timepicker>
-						</div>-->
+					<button type="submit" class="btn" [disabled]="!hairdresserForm.valid || userExists" id="a-check" (click)="checkEmail()">Check Email</button>
 					<br>
 					<br>
 					<div *ngIf="userExists">
@@ -134,7 +141,7 @@
 			</div>
 			<br>
 			<div class="modal-footer">
-				<button [disabled]="!userExists" *ngIf="!success" class="btn" type="submit" (click)="onAddHairdresser()">Add</button>
+				<button *ngIf="!addedHairdresser" [disabled]="!userExists" class="btn" type="submit" (click)="onAddHairdresser()">Add</button>
 			</div>
 		</div>
 	</div>

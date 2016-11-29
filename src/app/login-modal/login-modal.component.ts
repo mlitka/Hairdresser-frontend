@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { HairdresserService } from './../common/service/hairdresser.service';
 import { User } from './../common/model/user';
+import { ModalDirective } from 'ng2-bootstrap/ng2-bootstrap';
 
 @Component({
     selector: 'login-modal',
@@ -14,14 +15,22 @@ export class LoginModalComponent {
 
     public model_login = new User();
     public model_register = new User();
- 
+    login: boolean = false;
+
 
     onLoginClick() {
         console.log(this.model_login);
         this.hairdresserService
             .login(this.model_login);
-
+        this.login = true;
     }
+
+    // onAuthenticated(){
+    //      if(this.hairdresserService.authenticated){
+    //         document.getElementById("close-btn").click();
+    //         this.resetData();
+    //     }
+    // }
 
     onRegisterClick() {
         console.log(this.model_register);
@@ -32,18 +41,20 @@ export class LoginModalComponent {
                 console.log('REGISTERED!');
                 console.log(result);
                 document.getElementById("a_login").click();
+                this.resetData();
             },
             error => console.error(error)
             );
     }
 
-    passwordMatch():boolean{
-        return this.model_register.passwordConfirm!=undefined && this.model_register.password===this.model_register.passwordConfirm;
+    passwordMatch(): boolean {
+        return this.model_register.passwordConfirm != undefined && this.model_register.password === this.model_register.passwordConfirm;
     }
 
-    resetData(){
+    resetData() {
         this.model_login = new User();
         this.model_register = new User();
+        this.login = false;
     }
 
 }

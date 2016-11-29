@@ -1,64 +1,37 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit } from '@angular/core';
 
 @Component({
     selector: 'ng2-table',
     templateUrl: './ng2-table.component.html',
     styleUrls: ['ng2-table.component.scss']
 })
-export class Ng2TableComponent implements OnInit {
+export class Ng2TableComponent implements OnInit, AfterViewInit {
 
     public rows:Array<any> = [];
-  public columns:Array<any> = [
-    {title: '#', name: 'no'},
-    {
-      title: 'Service',
-      name: 'service',
-      sort: false,
-      filtering: {filterString: '', placeholder: 'Filter by service'}
-    },
-    {title: 'Hairdresser', name: 'hairdresser', sort: ''},
-    {title: 'Date', name: 'date', sort: '', filtering: {filterString: '', placeholder: 'Filter by date'}},
-    {title: 'Time', name: 'time' }
-  ];
+  @Input('columns') columns:Array<any> =[];
   public page:number = 1;
   public itemsPerPage:number = 10;
   public maxSize:number = 5;
   public numPages:number = 1;
   public length:number = 0;
 
-  public config:any = {
-    paging: true,
-    sorting: {columns: this.columns},
-    filtering: {filterString: ''},
-    className: []
-  };
+  @Input('config') config:any =[];
 
-  private data:Array<any> = [];
-  public upcomingVisits = [
-            {
-                no: '1',
-                hairdresser: 'Emma Smith',
-                service: 'colouring',
-                time: '',
-                date: '2016-12-12'
-            },
-            {
-                no: '2',
-                hairdresser: 'Henry Fox',
-                service: 'cutting',
-                time: '17:00',
-                date: '2016-12-21'
-            }
-        ];
+  @Input('data') data:Array<any> = [];
 
   public constructor() {
     this.length = this.data.length;
   }
 
   public ngOnInit():void {
-      this.data = this.upcomingVisits;
+      this.data = [];
       this.length = this.data.length;
     this.onChangeTable(this.config);
+  }
+
+  ngAfterViewInit(){
+    //   this.length = this.data.length;
+    // this.onChangeTable(this.config);
   }
 
   public changePage(page:any, data:Array<any> = this.data):Array<any> {

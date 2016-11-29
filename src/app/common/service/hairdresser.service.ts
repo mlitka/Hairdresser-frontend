@@ -24,48 +24,50 @@ export class HairdresserService {
     public auth_user_id = -1;
 
     constructor(private http: Http, private authHttp: AuthHttp, private router: Router) {
-        this.authenticated = !!localStorage.getItem('id_token');
+        this.authenticated = localStorage.getItem('id_token') != undefined;
+        this.auth_role = localStorage.getItem('auth_role');
+        this.auth_user_id = Number(localStorage.getItem('auth_user_id'));
     }
 
-    login(loginData: any) {
+    login(loginData: any){
         this.http.post(URL_CONST.LOGIN_URL, loginData)
             .subscribe(
             data => {
                 this.token = data
-                // this.useJwtHelper();
                 console.log(this.token._body);
-                localStorage.setItem('id_token', this.token._body + "jj");
+                localStorage.setItem('id_token', this.token._body);
                 this.manageToken();
             },
             err => console.log(err),
             () => console.log('Request Complete')
             );
-
     }
 
-    //will be changed! probably request to server to get role
     manageToken() {
         var token = localStorage.getItem('id_token');
-        // var decoded = this.jwtHelper.decodeToken(token);
-        // this.auth_role = decoded.role;
-        // this.auth_user_id = decoded.sub;
         this.authenticated = true;
         console.info(token);
-        // this.sendAuthGet(URL_CONST.LOGGED_USER_URL).subscribe(
-        //     result => {
-        //         console.log(result);
-        //     },
-        //     error => console.log(error)
-        // );
+        this.sendAuthGet(URL_CONST.LOGGED_USER_URL).subscribe(
+            result => {
+                console.log(result);
+                this.auth_role = result.role;
+                this.auth_user_id = result.id;
+                localStorage.setItem('auth_role', this.auth_role);
+                localStorage.setItem('auth_user_id', this.auth_user_id.toString());;
+            },
+            error => console.log(error)
+        );
     }
 
     logout() {
         // return this.sendGet(URL_CONST.LOGOUT_URL);
+        // this.router.navigate(['/']);
         this.authenticated = false;
-        this.auth_role = "";
+        this.auth_role = undefined;
         this.auth_user_id = -1;
         localStorage.removeItem('id_token');
-        this.router.navigate(['/']);
+        localStorage.removeItem('auth_role');
+        localStorage.removeItem('auth_user_id');
     }
 
     register(userData: any): Observable<any> {
@@ -96,11 +98,11 @@ export class HairdresserService {
         return this.sendGet(URL_CONST.OPINIONS_COUNT_URL + count.toString());
     }
 
-    getClientsOpinions(clientId: number): Observable<Opinion[]> {
-        return this.sendAuthGet(URL_CONST.OPINIONS_CLIENT_URL + clientId);
+    getClientsOpinions(): Observable<any[]> {
+        return this.sendAuthGet(URL_CONST.OPINIONS_CLIENT_URL + this.auth_user_id);
     }
 
-    getVisits(): Observable<Event[]> {
+    getVisits(): Observable<any[]> {
         return this.sendAuthGet(URL_CONST.VISITS_URL);
     }
 
@@ -108,8 +110,12 @@ export class HairdresserService {
         return this.sendAuthGet(URL_CONST.VISITS_PARAM_URL + hairdresserId);
     }
 
-    getClientsVisits(clientId: number): Observable<ClientVisit[]> {
-        return this.sendAuthGet(URL_CONST.VISITS_PARAM_URL + clientId);
+    getClientsUpcomingVisits(): Observable<Event[]> {
+        return this.sendAuthGet(URL_CONST.VISITS_PARAM_UPCOMING_URL + this.auth_user_id);
+    }
+
+    getClientsHistoryVisits(): Observable<Event[]> {
+        return this.sendAuthGet(URL_CONST.VISITS_PARAM_HISTORY_URL + this.auth_user_id);
     }
 
     getCheckUser(username: string): Observable<boolean> {
@@ -117,7 +123,7 @@ export class HairdresserService {
     }
 
     postUpgradeHairdresser(username: string): Observable<Hairdresser> {
-        return this.sendPost(URL_CONST.UPGRADE_HAIDRESSER, username);
+        return this.sendPost(URL_CONST.UPGRADE_HAIDRESSER + username, {});
     }
 
     postAddOpinion(opinion: Opinion) {
@@ -129,20 +135,20 @@ export class HairdresserService {
     }
 
     postShowService(serviceId: number) {
-        return this.sendPut(URL_CONST.SERVICES_SHOW + serviceId, {});
+        return this.sendPutResponseStatus(URL_CONST.SERVICES_SHOW + serviceId, {});
     }
 
     postHideService(serviceId: number) {
-        return this.sendPut(URL_CONST.SERVICES_HIDE + serviceId, {});
+        return this.sendPutResponseStatus(URL_CONST.SERVICES_HIDE + serviceId, {});
     }
 
     postReserveVisit(visit: Visit): Observable<any> {
-        return this.sendPost(URL_CONST.VISIT_RESERVE_URL, visit);
+        return this.sendPostResponseStatus(URL_CONST.VISIT_RESERVE_URL, visit);
     }
 
-    cancelVisit(visitId: number) {
+    cancelVisit(visitId: number): Observable<any> {
         return this.authHttp.delete(URL_CONST.VISITS_CANCEL_URL + visitId)
-            .map(this.extractData)
+            .map(this.extractStatus)
             .catch(this.handleError);
     }
 
@@ -156,7 +162,9 @@ export class HairdresserService {
         console.log(localStorage.getItem('id_token'));
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        // headers.append('withCredentials', 'true');
         headers.append('Authorization', 'Bearer ' + localStorage.getItem('id_token'))
+        // headers.append('my-token', 'hello');
         console.log(headers);
         let options = new RequestOptions({ headers: headers });
         return this.http.get(URL, { headers })
@@ -174,8 +182,28 @@ export class HairdresserService {
             .catch(this.handleError);
     }
 
+    public sendPostResponseStatus(URL: string, body: any): Observable<any> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem('id_token'))
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(URL, body, options)
+            .map(this.extractStatus)
+            .catch(this.handleError);
+    }
+
+    public sendPutResponseStatus(URL: string, body: any): Observable<any> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem('id_token'))
+        let options = new RequestOptions({ headers: headers });
+        return this.http.put(URL, body, options)
+            .map(this.extractStatus)
+            .catch(this.handleError);
+    }
+
     public sendPut(URL: string, body: any): Observable<any> {
-       let headers = new Headers();
+        let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Authorization', 'Bearer ' + localStorage.getItem('id_token'))
         let options = new RequestOptions({ headers: headers });
@@ -185,9 +213,17 @@ export class HairdresserService {
     }
 
     private extractData(res: Response) {
+        console.log(res);
         let body = res.json();
         return body || {};
     }
+
+    private extractStatus(res: Response) {
+        console.log(res);
+        // let body = res.json();
+        return res.status;
+    }
+
     private handleError(error: Response): Promise<any> {
         console.error('An error occurred', error);
         console.log(error.status)

@@ -3,4 +3,6 @@ export class Event{
     title:string;
     start:string;
     end:string;
+    info: string;
+    hairdresser:string;
 }

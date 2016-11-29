@@ -1,11 +1,11 @@
 <!-- Modal -->
-<div id="login-modal" class="modal fade" role="dialog">
+<div id="login-modal" bsModal #loginModal="bs-modal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" (click)="resetData()">&times;</button>
+				<button type="button" id="close-btn" class="close" data-dismiss="modal" (click)="resetData()">&times;</button>
 				<ul class="nav nav-tabs">
 					<li class="active"><a id='a_login' data-toggle="tab" href="#login">Login</a></li>
 					<li><a data-toggle="tab" href="#register">Register</a></li>
@@ -14,7 +14,7 @@
 			</div>
 			<div class="modal-body tab-content">
 				<div id="login" class="tab-pane fade in active">
-					<div class="container">
+					<div class="container" *ngIf="!hairdresserService.authenticated">
 						<form #loginForm="ngForm">
 							<div class="form-group">
 								<label for="username">Email</label>
@@ -26,7 +26,13 @@
 								<input type="password" class="form-control" id="password" required [(ngModel)]="model_login.password" name="password">
 							</div>
 						</form>
-					<button type="submit" class="btn btn-default btn-in-modal" data-dismiss="modal" [disabled]="!loginForm.form.valid" (click)="onLoginClick()">Login</button>
+						<button type="submit" class="btn btn-default btn-in-modal" [disabled]="!loginForm.form.valid" (click)="onLoginClick()">Login</button>
+					</div>
+					<div class="container" *ngIf="hairdresserService.authenticated && login">
+						<h5>Successfull login</h5>
+					</div>
+					<div class="container" *ngIf="!hairdresserService.authenticated && login">
+						<h5>Could not authenticate :(</h5>
 					</div>
 				</div>
 				<div id="register" class="tab-pane fade">
@@ -51,7 +57,7 @@
 							</div>
 							<div class="form-group">
 								<label for="password-confirm">Confirm password</label>
-								<input type="password" class="form-control" required id="password-confirm" [(ngModel)]="model_register.passwordConfirm" name="password-confirm" >
+								<input type="password" class="form-control" required id="password-confirm" [(ngModel)]="model_register.passwordConfirm" name="password-confirm">
 								<p class="err-form" *ngIf="!passwordMatch()">* Confirm password do not match password.</p>
 							</div>
 							<div class="form-group">
@@ -60,7 +66,7 @@
 									name="phoneNo">
 							</div>
 						</form>
-					<button type="submit" class="btn btn-default btn-in-modal" data-dismiss="modal" [disabled]="!registerForm.form.valid || !passwordMatch()" (click)="onRegisterClick()">Register</button>
+						<button type="submit" class="btn btn-default btn-in-modal" [disabled]="!registerForm.form.valid || !passwordMatch()" (click)="onRegisterClick()">Register</button>
 					</div>
 				</div>
 			</div>

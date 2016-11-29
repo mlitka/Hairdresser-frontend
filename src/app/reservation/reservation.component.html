@@ -16,12 +16,14 @@
 				<div class="col-md-12" *ngIf="chosenHairdresser && chosenDateInChild">
 				
 				<!--<div id="hourpicker" class="container" *ngIf="chosenHairdresser">-->
+					<span class="not-found" *ngIf="noAvailableHours">Unfortunately no available hours found on this day.</span>
 					<my-hourpicker [visits]="visits" (onChosenHour)="onChosenHour($event)"></my-hourpicker>
 				</div>
 			</div>
 			<div class="row">
 				<div><button id="reserve" class="btn btn-primary" data-toggle="modal" data-target="#confirm-modal" (click)="onReserveClick()">RESERVE VISIT</button></div>
-				<confirm-modal [chosenService]="chosenService" [chosenHairdresser]="chosenHairdresser" [chosenDate]="prepareDate(chosenDate)" [chosenTime]="chosenHour" [reservationEnabled]="reservationEnabled" [authenticated]="hairdresserService.authenticated" (onConfirm)="onModalConfirm($event)"></confirm-modal>
+				<confirm-modal [chosenService]="chosenService" [chosenHairdresser]="chosenHairdresser" [chosenDate]="prepareDate(chosenDate)" [chosenTime]="chosenHour" [reservationEnabled]="reservationEnabled" [authenticated]="hairdresserService.authenticated" (onConfirm)="onModalConfirm($event)" [model]="user"></confirm-modal>
+				<span class="not-found" *ngIf="reservationFail">Could not make this reservation.</span>
 			</div>
 		</div>
 		<br>

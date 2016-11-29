@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HairdresserService } from './../common/service/hairdresser.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { HairdresserService } from './../common/service/hairdresser.service';
 export class MainNavComponent {
 
 
-    constructor(private hairdresserService: HairdresserService) { }
+    constructor(private hairdresserService: HairdresserService, private router: Router) { }
 
     setActiveHref(activeHref: string) {
         window.localStorage.setItem("activeLink", activeHref);
@@ -20,20 +21,22 @@ export class MainNavComponent {
     }
 
     onLogoutClick() {
-        console.log("logging out");
-        this.hairdresserService
-            .logout();
+        this.router.navigate(['/']).then(() => {
+            console.log("logging out");
+            this.hairdresserService
+                .logout();
+        });
     }
 
-    displaySchedule():boolean{
-        return this.hairdresserService.authenticated && (this.hairdresserService.auth_role=='ADMIN' || this.hairdresserService.auth_role=='HAIRDRESSER');
+    displaySchedule(): boolean {
+        return this.hairdresserService.authenticated && (this.hairdresserService.auth_role == 'ADMIN' || this.hairdresserService.auth_role == 'HAIRDRESSER');
     }
 
-    displayClientPage():boolean{
-        return this.hairdresserService.authenticated && this.hairdresserService.auth_role=='USER'; 
+    displayClientPage(): boolean {
+        return this.hairdresserService.authenticated && this.hairdresserService.auth_role == 'USER';
     }
 
-    displayAdminPage():boolean{
-        return this.hairdresserService.authenticated && this.hairdresserService.auth_role=='ADMIN'; 
+    displayAdminPage(): boolean {
+        return this.hairdresserService.authenticated && this.hairdresserService.auth_role == 'ADMIN';
     }
 }

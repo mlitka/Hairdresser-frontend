@@ -3,5 +3,6 @@ export class Opinion{
     text:string;
     author:string;
     dateTime:Date;
+    date:string;
     userId:number;
 }

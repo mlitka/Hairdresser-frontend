@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HairdresserService } from './../common/service/hairdresser.service';
 import { HairService } from './../common/model/hair-service';
 import { Hairdresser } from './../common/model/hairdresser';
 import { VisitProposal } from './../common/model/visit-proposal';
 import { Visit } from './../common/model/visit';
 import { User } from './../common/model/user';
+import { Time } from './../common/model/time';
 
 @Component({
     selector: 'reservation',
@@ -19,7 +21,11 @@ export class ReservationComponent implements OnInit {
     public modalContent = 'Confirm reservation';
     public reservationEnabled = false;
     public authenticated: boolean = true;
-    public chosenDateInChild:boolean = false;
+    public chosenDateInChild: boolean = false;
+    public noAvailableHours: boolean = false;
+    public reservationFail: boolean = false;
+    user: User;
+    visit: Visit;
 
     public services: HairService[] = [
         {
@@ -27,91 +33,92 @@ export class ReservationComponent implements OnInit {
             name: "cutting",
             duration: 30,
             priceRange: "50-100 PLN",
-            hidden:false
+            hidden: false
         },
         {
             id: 2,
             name: "men cutting",
             duration: 60,
             priceRange: "40-50 PLN",
-            hidden:false
+            hidden: false
         },
         {
             id: 3,
             name: "coloring+cutting",
             duration: 120,
             priceRange: "150-200 PLN",
-            hidden:false
+            hidden: false
         },
         {
             id: 4,
             name: "modeling",
             duration: 60,
             priceRange: "100 PLN",
-            hidden:false
+            hidden: false
         }
     ];
     public hairdressers: Hairdresser[] = [
-        {
-            id: 1,
-            lastName: 'Fox',
-            firstName: 'Henry',
-            img: '',
-            email:"",
-            shiftStart:'',
-            shiftEnd:''
-        },
-        {
-            id: 2,
-            lastName: 'Jane',
-            firstName: 'Mary',
-            img: '',
-            email:"",
-            shiftStart:'',
-            shiftEnd:''
-        }
+        // {
+        //     id: 1,
+        //     lastName: 'Fox',
+        //     firstName: 'Henry',
+        //     img: '',
+        //     email: "",
+        //     shiftStart: new Time(),
+        //     shiftEnd: new Time()
+        // },
+        // {
+        //     id: 2,
+        //     lastName: 'Jane',
+        //     firstName: 'Mary',
+        //     img: '',
+        //     email: "",
+        //     shiftStart: new Time(),
+        //     shiftEnd: new Time()
+        // }
     ];
+
     public visits: VisitProposal[] = [
-        {
-            date: this.prepareDate(this.chosenDate),
-            time: '11:00',
-            endTime: ''
-        },
-        {
-            date: this.prepareDate(this.chosenDate),
-            time: '12:00',
-            endTime: ''
-        },
-        {
-            date: this.prepareDate(this.chosenDate),
-            time: '13:00',
-            endTime: ''
-        },
-        {
-            date: this.prepareDate(this.chosenDate),
-            time: '14:00',
-            endTime: ''
-        },
-        {
-            date: this.prepareDate(this.chosenDate),
-            time: '15:00',
-            endTime: ''
-        },
-        {
-            date: this.prepareDate(this.chosenDate),
-            time: '15:00',
-            endTime: ''
-        },
-        {
-            date: this.prepareDate(this.chosenDate),
-            time: '15:00',
-            endTime: ''
-        },
-        {
-            date: this.prepareDate(this.chosenDate),
-            time: '15:00',
-            endTime: ''
-        },
+        // {
+        //     date: this.prepareDate(this.chosenDate),
+        //     time: '11:00',
+        //     endTime: ''
+        // },
+        // {
+        //     date: this.prepareDate(this.chosenDate),
+        //     time: '12:00',
+        //     endTime: ''
+        // },
+        // {
+        //     date: this.prepareDate(this.chosenDate),
+        //     time: '13:00',
+        //     endTime: ''
+        // },
+        // {
+        //     date: this.prepareDate(this.chosenDate),
+        //     time: '14:00',
+        //     endTime: ''
+        // },
+        // {
+        //     date: this.prepareDate(this.chosenDate),
+        //     time: '15:00',
+        //     endTime: ''
+        // },
+        // {
+        //     date: this.prepareDate(this.chosenDate),
+        //     time: '15:00',
+        //     endTime: ''
+        // },
+        // {
+        //     date: this.prepareDate(this.chosenDate),
+        //     time: '15:00',
+        //     endTime: ''
+        // },
+        // {
+        //     date: this.prepareDate(this.chosenDate),
+        //     time: '15:00',
+        //     endTime: ''
+        // },
     ];
 
     private hairdressersIMGs = [
@@ -120,7 +127,7 @@ export class ReservationComponent implements OnInit {
         "../../../public/images/avatars/girl2.png"
     ];
 
-    constructor(private hairdresserService: HairdresserService) {
+    constructor(private hairdresserService: HairdresserService, private router: Router) {
     }
 
     ngOnInit() {
@@ -160,12 +167,19 @@ export class ReservationComponent implements OnInit {
     }
 
     onModalConfirm(user: User) {
-        // TODO: send POST to reserve a visit!
         console.info("SUBMITTED CLIENT: \n"
             + user.lastName + "\n"
             + user.firstName + "\n"
             + user.email + "\n"
             + user.phoneNo + "\n");
+        this.visit.client = user;
+        this.hairdresserService.postReserveVisit(this.visit).subscribe(
+            result => {
+                this.router.navigate(['/']);
+                // this.reservationFail = false;
+            },
+            err => this.reservationFail = true
+        );
     }
 
     getServices(): void {
@@ -186,20 +200,29 @@ export class ReservationComponent implements OnInit {
     }
 
     getVisitProposals(): void {
-        if (this.chosenDate && this.chosenService && this.chosenHairdresser && this.chosenHour) {
+        console.log("gettong props");
+        if (this.chosenDate && this.chosenService && this.chosenHairdresser) {
+            console.log("inside");
+
             this.hairdresserService.getVisitProposals(this.chosenHairdresser.id, this.chosenService.id, this.prepareDate(this.chosenDate))
                 .subscribe(
                 visits => {
                     this.visits = visits;
+                    this.noAvailableHours = false;
+                    this.reservationFail = false;
                     // console.log(this.visits);
                 },
-                error => console.error(error));
+                error => {
+                    this.visits = [];
+                    this.noAvailableHours = true;
+                });
         }
     }
 
     onReserveClick(): void {
         if (this.chosenDate && this.chosenService && this.chosenHairdresser && this.chosenHour) {
             this.reservationEnabled = true;
+            this.reservationFail = false;
             console.log("OK");
             console.log(this.prepareDate(this.chosenDate) + " " + this.chosenHairdresser.lastName + " " + this.chosenService.name + " " + this.chosenHour);
             this.modalContent = "You are about to confirm reservation on \n"
@@ -209,12 +232,15 @@ export class ReservationComponent implements OnInit {
                 + this.prepareDate(this.chosenDate) + " at "
                 + this.chosenHour;
             this.modalContent = this.modalContent.replace(/\n/g, "<br />");
-            let visit = new Visit();
-            visit.date = this.prepareDate(this.chosenDate);
-            visit.hairdresserId = this.chosenHairdresser.id;
-            visit.serviceId = this.chosenService.id;
-            visit.time = this.chosenHour;
-            // this.hairdresserService.postReserveVisit(visit);
+            this.visit = new Visit();
+            this.visit.date = this.prepareDate(this.chosenDate);
+            this.visit.hairdresserId = this.chosenHairdresser.id;
+            this.visit.hairServiceId = this.chosenService.id;
+            this.visit.time = this.chosenHour;
+            console.log("VISIT");
+            console.log(this.visit);
+            this.user = new User();
+
         } else {
             console.log("missing data");
             this.reservationEnabled = false;
@@ -234,7 +260,7 @@ export class ReservationComponent implements OnInit {
 
     private prepareDate(date: Date): string {
         let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-        let month = date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth();
+        let month = date.getMonth() + 1;
         return date.getFullYear() + "-" + month + "-" + day;
     }
 }

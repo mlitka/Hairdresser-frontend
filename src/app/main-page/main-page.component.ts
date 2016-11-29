@@ -10,34 +10,34 @@ import { HairdresserService } from './../common/service/hairdresser.service';
 })
 export class MainPageComponent implements OnInit {
     public opinions: Opinion[] = [
-       {
-            author: 'Emma White',
-            rate: 5,
-            text: 'Best hair salon in the city!',
-            dateTime: new Date(),
-            userId: 1
-        },
-        {
-            author: 'John Snow',
-            rate: 4,
-            text: 'I always come back there.',
-            dateTime: new Date(),
-            userId: 1
-        },
-        {
-            author: 'Jessica Huggs',
-            rate: 5,
-            text: 'They do coloring perfectly.',
-            dateTime: new Date(),
-            userId: 1
-        },
-        {
-            author: 'Veronica Grey',
-            rate: 5,
-            text: 'I will always recommend this salon.',
-            dateTime: new Date(),
-            userId: 1
-        }
+    //    {
+    //         author: 'Emma White',
+    //         rate: 5,
+    //         text: 'Best hair salon in the city!',
+    //         dateTime: new Date(),
+    //         userId: 1
+    //     },
+    //     {
+    //         author: 'John Snow',
+    //         rate: 4,
+    //         text: 'I always come back there.',
+    //         dateTime: new Date(),
+    //         userId: 1
+    //     },
+    //     {
+    //         author: 'Jessica Huggs',
+    //         rate: 5,
+    //         text: 'They do coloring perfectly.',
+    //         dateTime: new Date(),
+    //         userId: 1
+    //     },
+    //     {
+    //         author: 'Veronica Grey',
+    //         rate: 5,
+    //         text: 'I will always recommend this salon.',
+    //         dateTime: new Date(),
+    //         userId: 1
+    //     }
     ];
     public services: HairService[] = [
         {
@@ -92,7 +92,9 @@ export class MainPageComponent implements OnInit {
     getOpinions() {
         this.hairdresserService.getOpinionsCount(this.opinionsCount)
             .subscribe(
-            opinions => this.opinions = opinions,
+            opinions => {
+                this.opinions = opinions
+            },
             error => {}
             );
     }

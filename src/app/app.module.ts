@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { DatepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
-import { ScheduleModule } from 'primeng/primeng';
+import { ScheduleModule, DataTableModule, SharedModule } from 'primeng/primeng';
 import { RatingModule, ModalModule, TimepickerModule, } from 'ng2-bootstrap/ng2-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
@@ -37,7 +37,7 @@ import { LoginModalComponent } from './login-modal/login-modal.component';
 import { HairdresserService } from './common/service/hairdresser.service';
 import { CookieService } from 'angular2-cookie/core';
 import { AUTH_PROVIDERS } from 'angular2-jwt';
-import { AuthClient, AuthAdmin, AuthHairdresser } from './common/auth/auth.guard';
+import { AuthClient, AuthAdmin, AuthHairdresser, AuthHairdresserAdmin } from './common/auth/auth.guard';
 
 
 @NgModule({
@@ -57,6 +57,8 @@ import { AuthClient, AuthAdmin, AuthHairdresser } from './common/auth/auth.guard
     TimepickerModule,
     CustomFormsModule,
     Ng2TableModule,
+    DataTableModule,
+    SharedModule
   ],
   declarations: [
     AppComponent,
@@ -86,7 +88,8 @@ import { AuthClient, AuthAdmin, AuthHairdresser } from './common/auth/auth.guard
     AUTH_PROVIDERS,
     AuthClient,
     AuthAdmin,
-    AuthHairdresser
+    AuthHairdresser,
+    AuthHairdresserAdmin
   ],
   bootstrap: [AppComponent]
 })

@@ -491,3 +491,39 @@ router-outlet{
 table{
     color: white;
 }
+
+/*.fc-row .fc-content-skeleton td, .fc-row .fc-helper-skeleton td{
+  color: #7d0000;
+}*/
+
+/*primeng datatable*/
+.ui-datatable th.ui-state-default, .ui-widget-content, .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, SharedModule{
+  background-color: transparent;
+  color: white;
+}
+
+.ui-datatable th.ui-state-active, .ui-paginator .ui-paginator-page.ui-state-active{
+  background-color: #7d0000;
+  border-color: #7d0000;
+}
+
+.ui-datatable .ui-column-filter{
+  background-color: white;
+  color: #222;
+}
+ .ui-widget-header{
+  background: none;
+ }
+.ui-widget-content{
+  border-color: white;
+    /*background-color: rgba(255, 255, 255, 0.2);*/
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight{
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid white;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight, .ui-widget-header{
+  color: white;
+}

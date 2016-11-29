@@ -1,3 +1,4 @@
+import {Time} from './time';
 export class Hairdresser {
     id: number;
     lastName: string;

@@ -105,7 +105,7 @@ export class DatepickerComponent implements OnInit {
 
   private prepareDate(date: Date): string {
     let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-    let month = date.getMonth() < 10 ? "0" + date.getMonth() : date.getMonth();
+    let month = date.getMonth()+1 ;
     return date.getFullYear() + "-" + month + "-" + day;
   }
 }

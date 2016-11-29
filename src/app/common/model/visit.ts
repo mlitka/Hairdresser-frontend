@@ -1,6 +1,8 @@
+import {User} from './user';
 export class Visit {
     hairdresserId: number;
-    serviceId: number;
+    hairServiceId: number;
     time: string;
     date: string;
+    client: User;
 }
