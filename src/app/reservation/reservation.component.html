@@ -3,6 +3,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4" >
+					<span class="not-found" >Choose service:</span>
 					<my-servicepicker (onChosenService)="onChosenService($event)" [services]="services"></my-servicepicker>
 				</div>
 				<div id="datepicker" class="col-md-4" *ngIf="chosenService">
@@ -11,11 +12,13 @@
 			<!--</div>-->
 			<!--<div class="row">-->
 				<div class="col-md-4" *ngIf="chosenDateInChild">
+					<span class="not-found" >Choose hairdresser:</span>
 					<my-hairdresserpicker (onChosenHairdresser)="onChosenHairdresser($event)" [hairdressers]="hairdressers"></my-hairdresserpicker>
 				</div>
 				<div class="col-md-12" *ngIf="chosenHairdresser && chosenDateInChild">
 				
 				<!--<div id="hourpicker" class="container" *ngIf="chosenHairdresser">-->
+					<span class="not-found" *ngIf="!noAvailableHours">Choose hour:</span>
 					<span class="not-found" *ngIf="noAvailableHours">Unfortunately no available hours found on this day.</span>
 					<my-hourpicker [visits]="visits" (onChosenHour)="onChosenHour($event)"></my-hourpicker>
 				</div>
